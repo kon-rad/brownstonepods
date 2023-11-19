@@ -4,6 +4,8 @@ import { Analytics } from "@vercel/analytics/react";
 import { Providers } from "./providers";
 import { Metadata } from "next";
 import { cn } from "@/lib/utils";
+import { usePolyfire } from "polyfire-js/hooks";
+import React, { useState, useEffect } from "react";
 
 const title =
   "Platforms Starter Kit – The all-in-one starter kit for building multi-tenant applications.";
@@ -35,10 +37,33 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const { auth, models } = usePolyfire();
+  const { login, status } = auth;
+  const [helloWorld, setHelloWorld] = useState<string>();
+  const { generate } = models;
+  let element = null;
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      generate("Write a hello world haiku").then(setHelloWorld);
+    }
+  }, [status]);
+  if (status == "unauthenticated")
+    element = (
+      <button onClick={() => login("github")}>Login With GitHub</button>
+    );
+  else if (status == "loading") element = <div>Loading...</div>;
+  else if (status == "authenticated")
+    element = <div>We already logged in!</div>;
+  else element = <div />;
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn(cal.variable, inter.variable)}>
         <Providers>
+          {element}
+          polyfire^
+          {helloWorld}
+          hello world
           {children}
           <Analytics />
         </Providers>
