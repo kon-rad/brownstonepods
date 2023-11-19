@@ -1,3 +1,5 @@
+"use client";
+
 import { usePolyfire } from "polyfire-js/hooks";
 import React, { useState, useEffect } from "react";
 

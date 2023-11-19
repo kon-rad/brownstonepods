@@ -1,3 +1,4 @@
+
 import { InlineSnippet } from "@/components/form/domain-configuration";
 import Image from "next/image";
 import ChatBox from "../ChatBox";
