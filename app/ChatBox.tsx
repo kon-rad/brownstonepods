@@ -25,7 +25,7 @@ const ChatBox = () => {
   else element = <div />;
 
   return (
-    <div>
+    <div className="text-white">
       {element}
       polyfire^
       {helloWorld}

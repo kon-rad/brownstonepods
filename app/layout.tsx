@@ -7,10 +7,10 @@ import { cn } from "@/lib/utils";
 import React from "react";
 
 const title =
-  "Platforms Starter Kit – The all-in-one starter kit for building multi-tenant applications.";
+  "Brownstone Pods – The place for pioneers, adventureres and world travellers.";
 const description =
-  "The Platforms Starter Kit is a full-stack Next.js app with multi-tenancy and custom domain support. Built with Next.js App Router, Vercel Postgres and the Vercel Domains API.";
-const image = "https://vercel.pub/thumbnail.png";
+  "The Brownstone Pods is an Ai first platform for hosting your own Pods Coliving Apartmnet, where global citizens rent month to month and are accomodated by an innovatie Ai community manager.";
+const image = "/brownstone-logo.png";
 
 export const metadata: Metadata = {
   title,
@@ -36,11 +36,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  console.log("in layout");
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn(cal.variable, inter.variable)}>
         <Providers>
           <Analytics />
+          {children}
         </Providers>
       </body>
     </html>

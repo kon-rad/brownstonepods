@@ -38,6 +38,8 @@ export default async function SiteHomePage({
 }: {
   params: { domain: string };
 }) {
+  console.log('in app domain page');
+  
   const domain = decodeURIComponent(params.domain);
   const [data, posts] = await Promise.all([
     getSiteData(domain),
@@ -47,6 +49,7 @@ export default async function SiteHomePage({
   if (!data) {
     notFound();
   }
+
 
   return (
     <>
