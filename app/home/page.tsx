@@ -1,5 +1,6 @@
 import { InlineSnippet } from "@/components/form/domain-configuration";
 import Image from "next/image";
+import ChatBox from "../ChatBox";
 
 export default function HomePage() {
   return (
@@ -17,6 +18,7 @@ export default function HomePage() {
           app/home/page.tsx
         </InlineSnippet>
       </h1>
+      <ChatBox />
     </div>
   );
 }
