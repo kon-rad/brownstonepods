@@ -28,11 +28,11 @@ export const authOptions: NextAuthOptions = {
 
         return {
           role: profile.role ?? "user",
-          id: profile.id.toString(),
-          name: profile.name || profile.login,
-          google_username: profile.login,
+          id: profile.sub, // this is not id but it is random and not unique? https://stackoverflow.com/questions/8311836/how-to-identify-a-google-oauth2-user
+          name: profile.name,
           email: profile.email,
-          image: profile.avatar_url,
+          image: profile.picture,
+          email_verified: profile.email_verified,
         };
       },
     }),
