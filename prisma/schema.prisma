@@ -12,20 +12,28 @@ generator client {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String?
+  role          String?
+  total_stars   Int            @default(0)
   // if you are using Github OAuth, you can get rid of the username attribute (that is for Twitter OAuth)
   username      String?
   gh_username   String?
-  email         String?   @unique
+  g_username    String?
+  email         String?        @unique
   emailVerified DateTime?
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
   accounts      Account[]
   sessions      Session[]
   sites         Site[]
   posts         Post[]
+  recievedStars StarsPost[]    @relation("StarsGivenTo")
+  memberSites   SiteMember[]
+  memberActions MemberAction[]
+  givenStars    StarsPost[]    @relation("StarsGivenBy")
+  StarsPost     StarsPost[]
 }
 
 model Account {
@@ -55,6 +63,7 @@ model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
   userId       String
+  role         String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -91,21 +100,25 @@ model Post {
 }
 
 model Site {
-  id            String   @id @default(cuid())
+  id            String          @id @default(cuid())
   name          String?
-  description   String?  @db.Text
-  logo          String?  @default("https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/JRajRyC-PhBHEinQkupt02jqfKacBVHLWJq7Iy.png") @db.Text
-  font          String   @default("font-cal")
-  image         String?  @default("https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/hxfcV5V-eInX3jbVUhjAt1suB7zB88uGd1j20b.png") @db.Text
-  imageBlurhash String?  @default("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAhCAYAAACbffiEAAAACXBIWXMAABYlAAAWJQFJUiTwAAABfUlEQVR4nN3XyZLDIAwE0Pz/v3q3r55JDlSBplsIEI49h76k4opexCK/juP4eXjOT149f2Tf9ySPgcjCc7kdpBTgDPKByKK2bTPFEdMO0RDrusJ0wLRBGCIuelmWJAjkgPGDSIQEMBDCfA2CEPM80+Qwl0JkNxBimiaYGOTUlXYI60YoehzHJDEm7kxjV3whOQTD3AaCuhGKHoYhyb+CBMwjIAFz647kTqyapdV4enGINuDJMSScPmijSwjCaHeLcT77C7EC0C1ugaCTi2HYfAZANgj6Z9A8xY5eiYghDMNQBJNCWhASot0jGsSCUiHWZcSGQjaWWCDaGMOWnsCcn2QhVkRuxqqNxMSdUSElCDbp1hbNOsa6Ugxh7xXauF4DyM1m5BLtCylBXgaxvPXVwEoOBjeIFVODtW74oj1yBQah3E8tyz3SkpolKS9Geo9YMD1QJR1Go4oJkgO1pgbNZq0AOUPChyjvh7vlXaQa+X1UXwKxgHokB2XPxbX+AnijwIU4ahazAAAAAElFTkSuQmCC") @db.Text
-  subdomain     String?  @unique
-  customDomain  String?  @unique
-  message404    String?  @default("Blimey! You've found a page that doesn't exist.") @db.Text
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  user          User?    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  description   String?         @db.Text
+  logo          String?         @default("https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/JRajRyC-PhBHEinQkupt02jqfKacBVHLWJq7Iy.png") @db.Text
+  font          String          @default("font-cal")
+  image         String?         @default("https://public.blob.vercel-storage.com/eEZHAoPTOBSYGBE3/hxfcV5V-eInX3jbVUhjAt1suB7zB88uGd1j20b.png") @db.Text
+  imageBlurhash String?         @default("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAhCAYAAACbffiEAAAACXBIWXMAABYlAAAWJQFJUiTwAAABfUlEQVR4nN3XyZLDIAwE0Pz/v3q3r55JDlSBplsIEI49h76k4opexCK/juP4eXjOT149f2Tf9ySPgcjCc7kdpBTgDPKByKK2bTPFEdMO0RDrusJ0wLRBGCIuelmWJAjkgPGDSIQEMBDCfA2CEPM80+Qwl0JkNxBimiaYGOTUlXYI60YoehzHJDEm7kxjV3whOQTD3AaCuhGKHoYhyb+CBMwjIAFz647kTqyapdV4enGINuDJMSScPmijSwjCaHeLcT77C7EC0C1ugaCTi2HYfAZANgj6Z9A8xY5eiYghDMNQBJNCWhASot0jGsSCUiHWZcSGQjaWWCDaGMOWnsCcn2QhVkRuxqqNxMSdUSElCDbp1hbNOsa6Ugxh7xXauF4DyM1m5BLtCylBXgaxvPXVwEoOBjeIFVODtW74oj1yBQah3E8tyz3SkpolKS9Geo9YMD1QJR1Go4oJkgO1pgbNZq0AOUPChyjvh7vlXaQa+X1UXwKxgHokB2XPxbX+AnijwIU4ahazAAAAAElFTkSuQmCC") @db.Text
+  subdomain     String?         @unique
+  customDomain  String?         @unique
+  message404    String?         @default("Blimey! You've found a page that doesn't exist.") @db.Text
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  user          User?           @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId        String?
   posts         Post[]
+  managers      Manager[]       @relation("ManagerToSite")
+  ManagerToSite ManagerToSite[]
+  members       SiteMember[]
+  memberActions MemberAction[]
 
   @@index([userId])
 }
@@ -118,4 +131,53 @@ model Example {
   url           String?
   image         String? @db.Text
   imageBlurhash String? @db.Text
+}
+
+model Manager {
+  id            String          @id @default(cuid())
+  name          String
+  sites         Site[]          @relation("ManagerToSite")
+  ManagerToSite ManagerToSite[]
+}
+
+model ManagerToSite {
+  managerId String
+  siteId    String
+  manager   Manager @relation(fields: [managerId], references: [id])
+  site      Site    @relation(fields: [siteId], references: [id])
+
+  @@id([managerId, siteId])
+}
+
+model StarsPost {
+  id        String   @id @default(cuid())
+  givenBy   User     @relation("StarsGivenBy", fields: [givenById], references: [id])
+  givenById String
+  givenTo   User     @relation("StarsGivenTo", fields: [givenToId], references: [id])
+  givenToId String
+  createdAt DateTime @default(now())
+  comment   String
+  likes     Int      @default(0)
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+}
+
+model SiteMember {
+  id     String @id @default(cuid())
+  userId String
+  siteId String
+  user   User   @relation(fields: [userId], references: [id])
+  site   Site   @relation(fields: [siteId], references: [id])
+
+  @@unique([userId, siteId])
+}
+
+model MemberAction {
+  id         String   @id @default(cuid())
+  actionType String // 'join' or 'leave'
+  dateTime   DateTime @default(now())
+  userId     String
+  siteId     String
+  user       User     @relation(fields: [userId], references: [id])
+  site       Site     @relation(fields: [siteId], references: [id])
 }

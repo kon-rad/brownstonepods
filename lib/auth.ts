@@ -2,11 +2,26 @@ import { getServerSession, type NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/lib/prisma";
+import GoogleProvider from "next-auth/providers/google";
 
 const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 
 export const authOptions: NextAuthOptions = {
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      profile(profile) {
+        return {
+          role: profile.role ?? "user",
+          id: profile.id.toString(),
+          name: profile.name || profile.login,
+          google_username: profile.login,
+          email: profile.email,
+          image: profile.avatar_url,
+        };
+      },
+    }),
     GitHubProvider({
       clientId: process.env.AUTH_GITHUB_ID as string,
       clientSecret: process.env.AUTH_GITHUB_SECRET as string,
@@ -43,10 +58,24 @@ export const authOptions: NextAuthOptions = {
       },
     },
   },
+
+  // callbacks: {
+  //   jwt({ token, user }) {
+  //     if(user) token.role = user.role
+  //     return token
+  //   },
+  //   session({ session, token }) {
+  //     session.user.role = token.role
+  //     return session
+  //   }
+  // }
   callbacks: {
     jwt: async ({ token, user }) => {
+      console.log("callbacks in auth.ts, token, user ", token, user);
+
       if (user) {
         token.user = user;
+        token.role = user.role
       }
       return token;
     },
@@ -57,6 +86,7 @@ export const authOptions: NextAuthOptions = {
         id: token.sub,
         // @ts-expect-error
         username: token?.user?.username || token?.user?.gh_username,
+        role: token?.role,
       };
       return session;
     },
@@ -71,6 +101,7 @@ export function getSession() {
       username: string;
       email: string;
       image: string;
+      role: string;
     };
   } | null>;
 }
