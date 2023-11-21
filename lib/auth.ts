@@ -32,7 +32,7 @@ export const authOptions: NextAuthOptions = {
           name: profile.name,
           email: profile.email,
           image: profile.picture,
-          email_verified: profile.email_verified,
+          emailVerified: profile.email_verified,
         };
       },
     }),
