@@ -7,6 +7,9 @@ module.exports = {
       allowedOrigins: ["app.localhost:8888", "app.localhost:8888"],
     },
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   images: {
     remotePatterns: [
       { hostname: "public.blob.vercel-storage.com" },

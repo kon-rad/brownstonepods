@@ -3,6 +3,18 @@ import GitHubProvider from "next-auth/providers/github";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/lib/prisma";
 import GoogleProvider from "next-auth/providers/google";
+import { type DefaultSession, type DefaultUser } from "next-auth";
+
+declare module "next-auth" {
+  interface Session extends DefaultSession {
+    user: DefaultSession["user"] & {
+      id: string;
+    };
+  }
+  interface User extends DefaultUser {
+    role: string;
+  }
+}
 
 const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 
@@ -34,6 +46,7 @@ export const authOptions: NextAuthOptions = {
           gh_username: profile.login,
           email: profile.email,
           image: profile.avatar_url,
+          role: profile?.role ?? "user",
         };
       },
     }),
