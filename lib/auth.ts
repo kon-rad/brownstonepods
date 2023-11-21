@@ -12,6 +12,8 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
       profile(profile) {
+        console.log("google privder profile: ", profile);
+
         return {
           role: profile.role ?? "user",
           id: profile.id.toString(),
@@ -36,6 +38,7 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  secret: "IamVeryHandsome",
   pages: {
     signIn: `/login`,
     verifyRequest: `/login`,
@@ -75,7 +78,7 @@ export const authOptions: NextAuthOptions = {
 
       if (user) {
         token.user = user;
-        token.role = user.role
+        token.role = user.role;
       }
       return token;
     },
