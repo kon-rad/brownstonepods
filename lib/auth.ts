@@ -40,6 +40,8 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.AUTH_GITHUB_ID as string,
       clientSecret: process.env.AUTH_GITHUB_SECRET as string,
       profile(profile) {
+        console.log('github provider profile (in auth.ts) ', profile);
+        
         return {
           id: profile.id.toString(),
           name: profile.name || profile.login,

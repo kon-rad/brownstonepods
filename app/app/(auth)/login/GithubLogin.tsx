@@ -22,6 +22,8 @@ export default function LoginButton() {
     <button
       disabled={loading}
       onClick={() => {
+        console.log('logging in with github');
+        
         setLoading(true);
         signIn("github");
       }}
