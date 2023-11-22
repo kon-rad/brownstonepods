@@ -76,17 +76,7 @@ export const authOptions: NextAuthOptions = {
       },
     },
   },
-
-  // callbacks: {
-  //   jwt({ token, user }) {
-  //     if(user) token.role = user.role
-  //     return token
-  //   },
-  //   session({ session, token }) {
-  //     session.user.role = token.role
-  //     return session
-  //   }
-  // }
+  
   callbacks: {
     jwt: async ({ token, user }) => {
       console.log("callbacks in auth.ts, token, user ", token, user);
