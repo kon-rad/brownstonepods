@@ -6,6 +6,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { type DefaultSession, type DefaultUser } from "next-auth";
 import FacebookProvider from "next-auth/providers/facebook";
 import AppleProvider from "next-auth/providers/apple";
+import EmailProvider from "next-auth/providers/email";
 
 declare module "next-auth" {
   interface Session extends DefaultSession {
@@ -22,6 +23,10 @@ const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 
 export const authOptions: NextAuthOptions = {
   providers: [
+    EmailProvider({
+      server: process.env.EMAIL_SERVER,
+      from: process.env.EMAIL_FROM,
+    }),
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID as string,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
@@ -29,6 +34,7 @@ export const authOptions: NextAuthOptions = {
         console.log("facebook provider profile: ", profile);
 
         return {
+          providerType: "facebook",
           id: profile.id,
           name: profile.name,
           email: profile.email,
@@ -43,6 +49,8 @@ export const authOptions: NextAuthOptions = {
       profile(profile) {
         console.log("Apple provider profile: ", profile);
         return {
+          providerType: "apple",
+
           role: profile.role ?? "user",
           id: profile.sub,
           name: profile.name,
@@ -59,6 +67,8 @@ export const authOptions: NextAuthOptions = {
 
         return {
           role: profile.role ?? "user",
+          providerType: "google",
+
           id: profile.sub, // this is not id but it is random and not unique? https://stackoverflow.com/questions/8311836/how-to-identify-a-google-oauth2-user
           name: profile.name,
           email: profile.email,
@@ -74,6 +84,8 @@ export const authOptions: NextAuthOptions = {
         console.log("github provider profile (in auth.ts) ", profile);
 
         return {
+          providerType: "github",
+
           id: profile.id.toString(),
           name: profile.name || profile.login,
           gh_username: profile.login,
@@ -119,6 +131,8 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     session: async ({ session, token }) => {
+      console.log('inside callback session: ', session, token);
+      
       session.user = {
         ...session.user,
         // @ts-expect-error
@@ -133,6 +147,8 @@ export const authOptions: NextAuthOptions = {
 };
 
 export function getSession() {
+  console.log('getSession called: ');
+  
   return getServerSession(authOptions) as Promise<{
     user: {
       id: string;

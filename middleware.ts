@@ -22,16 +22,8 @@ export default async function middleware(req: NextRequest) {
     .get("host")!
     .replace(".localhost:3000", `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
 
-  const searchParams = req.nextUrl.searchParams.toString();
-  // Get the pathname of the request (e.g. /, /about, /blog/first-post)
-  const path = `${url.pathname}${
-    searchParams.length > 0 ? `?${searchParams}` : ""
-  }`;
   console.log("middleware yo", hostname);
 
-  // if (hostname == "localhost:3000") {
-  //   return NextResponse.redirect(new URL(`${path}`, `http://app.${hostname}`));
-  // }
   // special case for Vercel preview deployment URLs
   if (
     hostname.includes("---") &&
@@ -41,7 +33,11 @@ export default async function middleware(req: NextRequest) {
       process.env.NEXT_PUBLIC_ROOT_DOMAIN
     }`;
   }
-
+  const searchParams = req.nextUrl.searchParams.toString();
+  // Get the pathname of the request (e.g. /, /about, /blog/first-post)
+  const path = `${url.pathname}${
+    searchParams.length > 0 ? `?${searchParams}` : ""
+  }`;
   // rewrites for app pages
   if (hostname == `app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) {
     const session = await getToken({ req });
