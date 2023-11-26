@@ -34,7 +34,6 @@ export const authOptions: NextAuthOptions = {
         console.log("facebook provider profile: ", profile);
 
         return {
-          providerType: "facebook",
           id: profile.id,
           name: profile.name,
           email: profile.email,
@@ -49,9 +48,6 @@ export const authOptions: NextAuthOptions = {
       profile(profile) {
         console.log("Apple provider profile: ", profile);
         return {
-          providerType: "apple",
-
-          // role: profile.role ?? "user",
           id: profile.sub,
           name: profile.name,
           email: profile.email,
@@ -66,9 +62,6 @@ export const authOptions: NextAuthOptions = {
         console.log("google provider profile: ", profile);
 
         return {
-          // role: profile.role ?? "user",
-          providerType: "google",
-
           id: profile.sub, // this is not id but it is random and not unique? https://stackoverflow.com/questions/8311836/how-to-identify-a-google-oauth2-user
           name: profile.name,
           email: profile.email,
@@ -84,8 +77,6 @@ export const authOptions: NextAuthOptions = {
         console.log("github provider profile (in auth.ts) ", profile);
 
         return {
-          providerType: "github",
-
           id: profile.id.toString(),
           name: profile.name || profile.login,
           gh_username: profile.login,
