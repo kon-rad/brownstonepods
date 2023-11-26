@@ -8,16 +8,16 @@ import FacebookProvider from "next-auth/providers/facebook";
 import AppleProvider from "next-auth/providers/apple";
 import EmailProvider from "next-auth/providers/email";
 
-declare module "next-auth" {
-  interface Session extends DefaultSession {
-    user: DefaultSession["user"] & {
-      id: string;
-    };
-  }
-  interface User extends DefaultUser {
-    role: string;
-  }
-}
+// declare module "next-auth" {
+//   interface Session extends DefaultSession {
+//     user: DefaultSession["user"] & {
+//       id: string;
+//     };
+//   }
+//   interface User extends DefaultUser {
+//     role: string;
+//   }
+// }
 
 const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 
@@ -39,7 +39,7 @@ export const authOptions: NextAuthOptions = {
           name: profile.name,
           email: profile.email,
           image: profile.picture.data.url,
-          role: profile.role ?? "user",
+          // role: profile.role ?? "user",
         };
       },
     }),
@@ -51,7 +51,7 @@ export const authOptions: NextAuthOptions = {
         return {
           providerType: "apple",
 
-          role: profile.role ?? "user",
+          // role: profile.role ?? "user",
           id: profile.sub,
           name: profile.name,
           email: profile.email,
@@ -66,7 +66,7 @@ export const authOptions: NextAuthOptions = {
         console.log("google provider profile: ", profile);
 
         return {
-          role: profile.role ?? "user",
+          // role: profile.role ?? "user",
           providerType: "google",
 
           id: profile.sub, // this is not id but it is random and not unique? https://stackoverflow.com/questions/8311836/how-to-identify-a-google-oauth2-user
@@ -91,12 +91,11 @@ export const authOptions: NextAuthOptions = {
           gh_username: profile.login,
           email: profile.email,
           image: profile.avatar_url,
-          role: profile?.role ?? "user",
+          // role: profile?.role ?? "user",
         };
       },
     }),
   ],
-  secret: "IamVeryHandsome",
   pages: {
     signIn: `/login`,
     verifyRequest: `/login`,
@@ -126,20 +125,20 @@ export const authOptions: NextAuthOptions = {
 
       if (user) {
         token.user = user;
-        token.role = user.role;
+        // token.role = user.role;
       }
       return token;
     },
     session: async ({ session, token }) => {
-      console.log('inside callback session: ', session, token);
-      
+      console.log("inside callback session: ", session, token);
+
       session.user = {
         ...session.user,
         // @ts-expect-error
         id: token.sub,
         // @ts-expect-error
         username: token?.user?.username || token?.user?.gh_username,
-        role: token?.role,
+        // role: token?.role,
       };
       return session;
     },
@@ -147,8 +146,8 @@ export const authOptions: NextAuthOptions = {
 };
 
 export function getSession() {
-  console.log('getSession called: ');
-  
+  console.log("getSession called: ");
+
   return getServerSession(authOptions) as Promise<{
     user: {
       id: string;
@@ -156,7 +155,7 @@ export function getSession() {
       username: string;
       email: string;
       image: string;
-      role: string;
+      // role: string;
     };
   } | null>;
 }
