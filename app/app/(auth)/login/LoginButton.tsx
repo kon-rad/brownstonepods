@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 
-export default function LoginButton() {
+export default function LoginButton({ type, label, icon }: any) {
   const [loading, setLoading] = useState(false);
 
   // Get error message added by next/auth in URL.
@@ -22,10 +22,10 @@ export default function LoginButton() {
     <button
       disabled={loading}
       onClick={() => {
-        console.log('logging in with github');
-        
+        console.log("logging in with ", type);
+
         setLoading(true);
-        signIn("github");
+        signIn(type);
       }}
       className={`${
         loading
@@ -38,9 +38,9 @@ export default function LoginButton() {
       ) : (
         <>
           <>
-            Github icon
+            {icon}
             <p className="text-sm font-medium text-stone-600 dark:text-stone-400">
-              Login with Github
+              Login with {label}
             </p>
           </>
         </>

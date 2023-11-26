@@ -4,6 +4,8 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/lib/prisma";
 import GoogleProvider from "next-auth/providers/google";
 import { type DefaultSession, type DefaultUser } from "next-auth";
+import FacebookProvider from "next-auth/providers/facebook";
+import AppleProvider from "next-auth/providers/apple";
 
 declare module "next-auth" {
   interface Session extends DefaultSession {
@@ -20,11 +22,40 @@ const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 
 export const authOptions: NextAuthOptions = {
   providers: [
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_CLIENT_ID as string,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
+      profile(profile) {
+        console.log("facebook provider profile: ", profile);
+
+        return {
+          id: profile.id,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture.data.url,
+          role: profile.role ?? "user",
+        };
+      },
+    }),
+    AppleProvider({
+      clientId: process.env.APPLE_ID as string,
+      clientSecret: process.env.APPLE_SECRET as string,
+      profile(profile) {
+        console.log("Apple provider profile: ", profile);
+        return {
+          role: profile.role ?? "user",
+          id: profile.sub,
+          name: profile.name,
+          email: profile.email,
+          image: null,
+        };
+      },
+    }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
       profile(profile) {
-        console.log("google privder profile: ", profile);
+        console.log("google provider profile: ", profile);
 
         return {
           role: profile.role ?? "user",
@@ -40,8 +71,8 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.AUTH_GITHUB_ID as string,
       clientSecret: process.env.AUTH_GITHUB_SECRET as string,
       profile(profile) {
-        console.log('github provider profile (in auth.ts) ', profile);
-        
+        console.log("github provider profile (in auth.ts) ", profile);
+
         return {
           id: profile.id.toString(),
           name: profile.name || profile.login,
@@ -76,7 +107,7 @@ export const authOptions: NextAuthOptions = {
       },
     },
   },
-  
+
   callbacks: {
     jwt: async ({ token, user }) => {
       console.log("callbacks in auth.ts, token, user ", token, user);

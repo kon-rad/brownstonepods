@@ -1,7 +1,9 @@
 import Image from "next/image";
-import GithubLogin from "./GithubLogin";
-import GoogleLogin from "./GoogleLogin";
+import LoginButton from "./LoginButton";
 import { Suspense } from "react";
+import { FaFacebookSquare } from "react-icons/fa";
+import { FaApple } from "react-icons/fa";
+import { FaGoogle } from "react-icons/fa";
 
 export default function LoginPage() {
   console.log("login page");
@@ -38,8 +40,13 @@ export default function LoginPage() {
             <div className="my-2 h-10 w-full rounded-md border border-stone-200 bg-stone-100 dark:border-stone-700 dark:bg-stone-800" />
           }
         >
-          <GithubLogin />
-          <GoogleLogin />
+          <LoginButton type="google" label="Google" icon={<FaGoogle />} />
+          <LoginButton
+            type="facebook"
+            label="Facebook"
+            icon={<FaFacebookSquare />}
+          />
+          <LoginButton type="apple" label="Apple" icon={<FaApple />} />
         </Suspense>
       </div>
     </div>
