@@ -29,15 +29,14 @@ export default async function Sites({ limit }: { limit?: number }) {
     </div>
   ) : (
     <div className="mt-20 flex flex-col items-center space-x-4">
-      <h1 className="font-cal text-4xl">No Homes Yet</h1>
+      <h1 className="mb-12 font-cal text-4xl">No Homes Yet</h1>
       <Image
         alt="person resting"
-        src="/images/james.jpeg"
+        src="/searching.svg"
         width={400}
         height={400}
       />
-      <img src="/images/james.jpeg" alt="My SVG" />
-      <p className="text-lg text-stone-500">
+      <p className="mt-8 text-lg text-stone-500">
         You do not have any sites yet. Create one to get started.
       </p>
     </div>
