@@ -20,8 +20,8 @@ export default function Notifications() {
   ];
   return (
     <div className="flex w-full">
-      <div className="w-full rounded-xl p-8 dark:!bg-stone-900">
-        <div className="text-brand-dark-text text-2xl">Unread</div>
+      <div className="dark:!bg-light-brown w-full rounded-xl p-8">
+        <div className="text-dark-text text-2xl">Unread</div>
         <div className="p4 flex flex-col">
           {unread.map((item: any, i: number) => {
             return (

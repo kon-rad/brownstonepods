@@ -12,6 +12,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // brownstone color palette
+        'dark-text': '#333333',
+        'light-text': '#666',
+        'brand-active': '#ee6363',
+        brown: "#c28257",
+        "light-brown": "#E7DBCD",
+        "dark-brown": "#29160a",
+
         // light mode
         tremor: {
           brand: {

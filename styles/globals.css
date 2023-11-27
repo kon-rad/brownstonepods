@@ -2,13 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root {
   --brand-brown: #c28257;
   --brand-light-brown: #E7DBCD;
   --brand-dark-text: #333333;
   --brand-light-text: #666;
   --brand-active: #ee6363;
-}
+} */
 
 @media (prefers-color-scheme: dark) {
   body {
@@ -111,13 +111,13 @@ ul[data-type="taskList"] li[data-checked="true"] > div > p {
   text-decoration-thickness: 2px;
 }
 
-.bg-brand-brown {
+/* .dark:bg-brand-brown {
   background-color: var(--brand-brown);
 }
 .text-brand-brown {
   color: var(--brand-brown);
 }
-.bg-brand-light-brown {
+.dark:bg-brand-light-brown {
   background-color: var(--brand-light-brown);
 }
 .text-brand-light-brown {
@@ -140,4 +140,4 @@ ul[data-type="taskList"] li[data-checked="true"] > div > p {
 }
 .text-brand-active {
   color: var(--brand-active);
-}
+} */

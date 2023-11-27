@@ -21,7 +21,7 @@ export default function OverviewStats() {
 
   return (
     <div className="grid gap-6 sm:grid-cols-2">
-      <Card className="dark:!bg-stone-900">
+      <Card className="dark:!bg-brand-light-brown">
         <Text>Total Visitors</Text>
         <Flex
           className="space-x-3 truncate"
