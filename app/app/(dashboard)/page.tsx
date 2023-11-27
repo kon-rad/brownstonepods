@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import Sites from "@/components/sites";
-import OverviewStats from "@/components/overview-stats";
+import Notifications from "@/components/notifications";
 import Posts from "@/components/posts";
 import Link from "next/link";
 import PlaceholderCard from "@/components/placeholder-card";
@@ -11,15 +11,15 @@ export default function Overview() {
     <div className="flex max-w-screen-xl flex-col space-y-12 p-8">
       <div className="flex flex-col space-y-6">
         <h1 className="font-cal text-3xl font-bold dark:text-white">
-          Overview
+          Notifications
         </h1>
-        <OverviewStats />
+        <Notifications />
       </div>
 
       <div className="flex flex-col space-y-6">
         <div className="flex items-center justify-between">
           <h1 className="font-cal text-3xl font-bold dark:text-white">
-            Top Sites
+            Homes
           </h1>
           <Suspense fallback={null}>
             <OverviewSitesCTA />

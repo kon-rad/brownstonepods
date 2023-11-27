@@ -34,6 +34,7 @@ model User {
   memberActions MemberAction[]
   givenStars    StarsPost[]    @relation("StarsGivenBy")
   StarsPost     StarsPost[]
+  Owner         Owner[]
 }
 
 model Account {
@@ -180,4 +181,10 @@ model MemberAction {
   siteId     String
   user       User     @relation(fields: [userId], references: [id])
   site       Site     @relation(fields: [siteId], references: [id])
+}
+
+model Owner {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 }

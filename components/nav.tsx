@@ -15,6 +15,9 @@ import {
   FileCode,
   Github,
 } from "lucide-react";
+import { FaMap } from "react-icons/fa";
+import { FaCity } from "react-icons/fa";
+import { IoIosBed } from "react-icons/io";
 import {
   useParams,
   usePathname,
@@ -26,39 +29,19 @@ import Image from "next/image";
 
 const externalLinks = [
   {
-    name: "Read announcement",
-    href: "https://vercel.com/blog/platforms-starter-kit",
-    icon: <Megaphone width={18} />,
+    name: "Apply to NYC location",
+    href: "https://brownstone.nyc/",
+    icon: <FaCity width={18} />,
   },
   {
-    name: "Star on GitHub",
-    href: "https://github.com/vercel/platforms",
-    icon: <Github width={18} />,
+    name: "Locations",
+    href: "https://brownstone.live/",
+    icon: <FaMap width={18} />,
   },
   {
-    name: "Read the guide",
-    href: "https://vercel.com/guides/nextjs-multi-tenant-application",
-    icon: <FileCode width={18} />,
-  },
-  {
-    name: "View demo site",
-    href: "https://demo.vercel.pub",
-    icon: <Layout width={18} />,
-  },
-  {
-    name: "Deploy your own",
-    href: "https://vercel.com/templates/next.js/platforms-starter-kit",
-    icon: (
-      <svg
-        width={18}
-        viewBox="0 0 76 76"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="py-1 text-black dark:text-white"
-      >
-        <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="currentColor" />
-      </svg>
-    ),
+    name: "Buy a Pod",
+    href: "https://brownstone.live/sales",
+    icon: <IoIosBed width={18} />,
   },
 ];
 
@@ -75,6 +58,8 @@ export default function Nav({ children }: { children: ReactNode }) {
       });
     }
   }, [segments, id]);
+  console.log("segments: ", segments);
+  console.log("id: ", id);
 
   const tabs = useMemo(() => {
     if (segments[0] === "site" && id) {
@@ -175,36 +160,16 @@ export default function Nav({ children }: { children: ReactNode }) {
       >
         <div className="grid gap-2">
           <div className="flex items-center space-x-2 rounded-lg px-2 py-1.5">
-            <a
-              href="https://vercel.com/templates/next.js/platforms-starter-kit"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg p-1.5 hover:bg-stone-200 dark:hover:bg-stone-700"
-            >
-              <svg
-                width="26"
-                viewBox="0 0 76 65"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-black dark:text-white"
-              >
-                <path
-                  d="M37.5274 0L75.0548 65H0L37.5274 0Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </a>
-            <div className="h-6 rotate-[30deg] border-l border-stone-400 dark:border-stone-500" />
             <Link
               href="/"
               className="rounded-lg p-2 hover:bg-stone-200 dark:hover:bg-stone-700"
             >
               <Image
-                src="/logo.png"
-                width={24}
-                height={24}
+                src="/brownstone-logo.png"
+                width={360}
+                height={100}
                 alt="Logo"
-                className="dark:scale-110 dark:rounded-full dark:border dark:border-stone-400"
+                className="rounded-xl dark:scale-110 dark:border dark:border-stone-400"
               />
             </Link>
           </div>

@@ -53,11 +53,9 @@ export const authOptions: NextAuthOptions = {
         token,
       }) => {
         const { host } = new URL(url);
-        console.log("sending email verification. url: ", url, email, host);
         const customizedUrl = `http://app.${host}/api/auth/callback/email?token=${token}&email=${encodeURIComponent(
           email,
         )}`;
-        console.log("customizedUrl: ", customizedUrl);
 
         return mailgunTransport.sendMail({
           to: email,
@@ -71,8 +69,6 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.FACEBOOK_CLIENT_ID as string,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
       profile(profile) {
-        console.log("facebook provider profile: ", profile);
-
         return {
           id: profile.id,
           name: profile.name,
@@ -86,7 +82,6 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.APPLE_CLIENT_ID as string,
       clientSecret: process.env.APPLE_CLIENT_SECRET as string,
       profile(profile) {
-        console.log("Apple provider profile: ", profile);
         return {
           id: profile.sub,
           name: profile.name,
@@ -99,8 +94,6 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
       profile(profile) {
-        console.log("google provider profile: ", profile);
-
         return {
           id: profile.sub, // this is not id but it is random and not unique? https://stackoverflow.com/questions/8311836/how-to-identify-a-google-oauth2-user
           name: profile.name,
@@ -114,8 +107,6 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.AUTH_GITHUB_ID as string,
       clientSecret: process.env.AUTH_GITHUB_SECRET as string,
       profile(profile) {
-        console.log("github provider profile (in auth.ts) ", profile);
-
         return {
           id: profile.id.toString(),
           name: profile.name || profile.login,
@@ -161,8 +152,6 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     jwt: async ({ token, user }) => {
-      console.log("callbacks in auth.ts, token, user ", token, user);
-
       if (user) {
         token.user = user;
         // token.role = user.role;
@@ -170,8 +159,6 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     session: async ({ session, token }) => {
-      console.log("inside callback session: ", session, token);
-
       session.user = {
         ...session.user,
         // @ts-expect-error
@@ -186,8 +173,6 @@ export const authOptions: NextAuthOptions = {
 };
 
 export function getSession() {
-  console.log("getSession called: ");
-
   return getServerSession(authOptions) as Promise<{
     user: {
       id: string;

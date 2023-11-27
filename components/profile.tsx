@@ -9,6 +9,7 @@ export default async function Profile() {
   if (!session?.user) {
     redirect("/login");
   }
+  console.log("session: ", session);
 
   return (
     <div className="flex w-full items-center justify-between">

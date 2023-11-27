@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --brand-brown: #c28257;
+  --brand-light-brown: #E7DBCD;
+  --brand-dark-text: #333333;
+  --brand-light-text: #666;
+  --brand-active: #ee6363;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #000000;
@@ -101,4 +109,35 @@ ul[data-type="taskList"] li[data-checked="true"] > div > p {
   color: #a8a29e;
   text-decoration: line-through;
   text-decoration-thickness: 2px;
+}
+
+.bg-brand-brown {
+  background-color: var(--brand-brown);
+}
+.text-brand-brown {
+  color: var(--brand-brown);
+}
+.bg-brand-light-brown {
+  background-color: var(--brand-light-brown);
+}
+.text-brand-light-brown {
+  color: var(--brand-light-brown);
+}
+.bg-brand-dark-text {
+  background-color: var(--brand-dark-text);
+}
+.text-brand-dark-text {
+  color: var(--brand-dark-text);
+}
+.bg-brand-light-text {
+  background-color: var(--brand-light-text);
+}
+.text-brand-light-text {
+  color: var(--brand-light-text);
+}
+.bg-brand-active {
+  background-color: var(--brand-active);
+}
+.text-brand-active {
+  color: var(--brand-active);
 }
