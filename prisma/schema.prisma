@@ -120,6 +120,11 @@ model Site {
   ManagerToSite ManagerToSite[]
   members       SiteMember[]
   memberActions MemberAction[]
+  streetAddress String?
+  city          String?
+  state         String?
+  zipCode       String?
+  aptNumber     String?
 
   @@index([userId])
 }
