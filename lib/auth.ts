@@ -7,7 +7,18 @@ import { type DefaultSession, type DefaultUser } from "next-auth";
 import FacebookProvider from "next-auth/providers/facebook";
 import AppleProvider from "next-auth/providers/apple";
 import EmailProvider from "next-auth/providers/email";
+import nodemailer from "nodemailer";
 
+// Create a nodemailer transport for Mailgun
+const mailgunTransport = nodemailer.createTransport({
+  host: "smtp.mailgun.org",
+  port: 587,
+  secure: false, // true for 465, false for other ports
+  auth: {
+    user: process.env.MAILGUN_USER, // Your Mailgun SMTP user
+    pass: process.env.MAILGUN_PASSWORD, // Your Mailgun SMTP password
+  },
+});
 // declare module "next-auth" {
 //   interface Session extends DefaultSession {
 //     user: DefaultSession["user"] & {
@@ -24,8 +35,37 @@ const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 export const authOptions: NextAuthOptions = {
   providers: [
     EmailProvider({
-      server: process.env.EMAIL_SERVER,
+      server: {
+        // ... using the nodemailer transport for Mailgun
+        host: process.env.EMAIL_SERVER_HOST,
+        port: Number(process.env.EMAIL_SERVER_PORT),
+        auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASSWORD,
+        },
+      },
       from: process.env.EMAIL_FROM,
+      // Here we pass our custom nodemailer transport
+      sendVerificationRequest: ({
+        identifier: email,
+        url,
+        provider: { server, from },
+        token,
+      }) => {
+        const { host } = new URL(url);
+        console.log("sending email verification. url: ", url, email, host);
+        const customizedUrl = `http://app.${host}/api/auth/callback/email?token=${token}&email=${encodeURIComponent(
+          email,
+        )}`;
+        console.log("customizedUrl: ", customizedUrl);
+
+        return mailgunTransport.sendMail({
+          to: email,
+          from,
+          subject: `Sign in to ${host}`,
+          html: `<p>Sign in to ${host}</p><p><a href="${customizedUrl}">Click here to sign in</a></p>`,
+        });
+      },
     }),
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID as string,

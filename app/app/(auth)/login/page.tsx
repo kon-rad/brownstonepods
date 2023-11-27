@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaApple } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
+import { HiOutlineMail } from "react-icons/hi";
 
 export default function LoginPage() {
   console.log("login page");
@@ -40,13 +41,26 @@ export default function LoginPage() {
             <div className="my-2 h-10 w-full rounded-md border border-stone-200 bg-stone-100 dark:border-stone-700 dark:bg-stone-800" />
           }
         >
-          <LoginButton type="google" label="Google" icon={<FaGoogle />} />
+          <LoginButton
+            type="google"
+            label="Login with Google"
+            icon={<FaGoogle />}
+          />
           <LoginButton
             type="facebook"
-            label="Facebook"
+            label="Login with Facebook"
             icon={<FaFacebookSquare />}
           />
-          <LoginButton type="apple" label="Apple" icon={<FaApple />} />
+          <LoginButton
+            type="apple"
+            label="Login with Apple"
+            icon={<FaApple />}
+          />
+          <LoginButton
+            type="email"
+            label="Send magic link"
+            icon={<HiOutlineMail />}
+          />
         </Suspense>
       </div>
     </div>
