@@ -4,6 +4,7 @@ import ChatBox from "../ChatBox";
 import { Chatbot } from "../Chat";
 import Link from "next/link";
 import { TWITTER_URL } from "@/lib/constants";
+import FAQ from "./components/faq";
 
 export default function HomePage() {
   return (
@@ -39,6 +40,7 @@ export default function HomePage() {
         />
         <h1 className="my-18 text-5xl text-white">brownstone pods coliving</h1>
       </div>
+      <FAQ />l
     </div>
   );
 }

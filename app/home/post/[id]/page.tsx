@@ -9,13 +9,13 @@ export default async function PostPage({ params }: { params: { id: string } }) {
     redirect("/login");
   }
   // todo: check how frequently this renders.  is it on every update?? is it just once at the start?
-  
+
   const data = await prisma.post.findUnique({
     where: {
       id: decodeURIComponent(params.id),
     },
     include: {
-      site: { 
+      site: {
         select: {
           subdomain: true,
         },
