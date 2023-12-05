@@ -18,6 +18,9 @@ export default function CreateSiteModal() {
     name: "",
     subdomain: "",
     description: "",
+    address: "",
+    rentRate: undefined as any,
+    mainImage: "",
   });
 
   useEffect(() => {
@@ -46,17 +49,17 @@ export default function CreateSiteModal() {
           }
         })
       }
-      className="w-full rounded-md bg-white dark:bg-black md:max-w-md md:border md:border-stone-200 md:shadow dark:md:border-stone-700"
+      className="w-full rounded-md bg-white dark:bg-black md:max-w-2xl md:border md:border-stone-200 md:shadow dark:md:border-stone-700"
     >
       <div className="relative flex flex-col space-y-4 p-5 md:p-10">
-        <h2 className="font-cal text-2xl dark:text-white">Create a new site</h2>
+        <h2 className="font-cal text-2xl dark:text-white">Create a new Home</h2>
 
         <div className="flex flex-col space-y-2">
           <label
             htmlFor="name"
             className="text-sm font-medium text-stone-500 dark:text-stone-400"
           >
-            Site Name
+            Home Name
           </label>
           <input
             name="name"
@@ -114,6 +117,46 @@ export default function CreateSiteModal() {
             className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black  focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
           />
         </div>
+
+        <div className="flex flex-col space-y-2">
+          <label
+            htmlFor="location"
+            className="text-sm font-medium text-stone-500"
+          >
+            Address (this will only be visible to residents)
+          </label>
+          <textarea
+            name="address"
+            placeholder="Address of the home"
+            value={data.address}
+            onChange={(e) => setData({ ...data, address: e.target.value })}
+            maxLength={140}
+            rows={3}
+            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black  focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+          />
+        </div>
+
+        <div className="flex flex-col space-y-2">
+          <label
+            htmlFor="rentRate"
+            className="text-sm font-medium text-stone-500 dark:text-stone-400"
+          >
+            Rental Rate
+          </label>
+          <input
+            name="rentRate"
+            type="number"
+            placeholder="You can edit this later"
+            autoFocus
+            value={data.rentRate}
+            onChange={(e) =>
+              setData({ ...data, rentRate: Number(e.target.value) })
+            }
+            maxLength={32}
+            required
+            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+          />
+        </div>
       </div>
       <div className="flex items-center justify-end rounded-b-lg border-t border-stone-200 bg-stone-50 p-3 dark:border-stone-700 dark:bg-stone-800 md:px-10">
         <CreateSiteFormButton />
@@ -133,7 +176,7 @@ function CreateSiteFormButton() {
       )}
       disabled={pending}
     >
-      {pending ? <LoadingDots color="#808080" /> : <p>Create Site</p>}
+      {pending ? <LoadingDots color="#808080" /> : <p>Create Home</p>}
     </button>
   );
 }

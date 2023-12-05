@@ -1,5 +1,3 @@
-import { Accordion } from "flowbite-react";
-
 const FAQ = () => {
   // ## create an account or log in
 
@@ -60,53 +58,7 @@ const FAQ = () => {
   // - Each icon is tied to a pod, and other private spaces like the closet and kitchen cabinet space
   // - When you join a site you pick a pod and your icon is entered in the platform. When you move out, that icon becomes free and then it is clear which space belongs to which person.
 
-  return (
-    <div className="my-12 flex max-w-screen-xl flex-col">
-      <Accordion collapseAll>
-        <Accordion.Panel>
-          <Accordion.Title className="w-full rounded-xl px-2 py-1">
-            What are Brownstone Pods?
-          </Accordion.Title>
-          <Accordion.Content>
-            This is an innovative coliving community with locations in San
-            Francisco, Palo Alto, Bakersfield and soon more. Each location is
-            unique but alls use the{" "}
-            <a href="brownstone.live/pods" target="_blank">
-              pods
-            </a>{" "}
-            as the sleeping area. The rent is kept as low as possible, from $500
-            to $700. Each community is self organized.
-          </Accordion.Content>
-        </Accordion.Panel>
-        <Accordion.Panel>
-          <Accordion.Title className="w-full rounded-xl px-2 py-1">
-            How can I apply?
-          </Accordion.Title>
-          <Accordion.Content>
-            Go to{" "}
-            <a href="brownstone.live/apply" target="_blank">
-              brownstone.live/app
-            </a>{" "}
-            and fill out an application.
-          </Accordion.Content>
-        </Accordion.Panel>
-        <Accordion.Panel>
-          <Accordion.Title className="w-full rounded-xl px-2 py-1">
-            What does the brownstone platform do?
-          </Accordion.Title>
-          <Accordion.Content>
-            Create an account at{" "}
-            <a href="app.brownstonepods.com" target="_blank">
-              app.brownstonepods.com
-            </a>{" "}
-            to find openings. If you are a resident you can log in to your
-            portal where you can manage your membership and take part in your
-            home community life.
-          </Accordion.Content>
-        </Accordion.Panel>
-      </Accordion>
-    </div>
-  );
+  return <div className="my-12 flex max-w-screen-xl flex-col">faq here</div>;
 };
 
 export default FAQ;

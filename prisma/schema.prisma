@@ -120,6 +120,8 @@ model Site {
   ManagerToSite ManagerToSite[]
   members       SiteMember[]
   memberActions MemberAction[]
+  rentRate      Int?
+  address       String?
   streetAddress String?
   city          String?
   state         String?
