@@ -31,6 +31,8 @@ export const createSite = async (formData: FormData) => {
   const name = formData.get("name") as string;
   const description = formData.get("description") as string;
   const subdomain = formData.get("subdomain") as string;
+  const address = formData.get("address") as string;
+  const rentRate = Number(formData.get("rentRate"));
 
   try {
     const response = await prisma.site.create({
@@ -38,6 +40,8 @@ export const createSite = async (formData: FormData) => {
         name,
         description,
         subdomain,
+        address,
+        rentRate,
         user: {
           connect: {
             id: session.user.id,
@@ -61,6 +65,29 @@ export const createSite = async (formData: FormData) => {
     }
   }
 };
+
+export const updateSiteHome = withSiteAuth(
+  async (formData: any, site: Site) => {
+    console.log("-- formData, site ", formData, site);
+
+    try {
+      let response;
+      response = await prisma.site.update({
+        where: {
+          id: site.id,
+        },
+        data: {
+          ...formData,
+        },
+      });
+      return response;
+    } catch (error: any) {
+      return {
+        error: error.message,
+      };
+    }
+  },
+);
 
 export const updateSite = withSiteAuth(
   async (formData: FormData, site: Site, key: string) => {

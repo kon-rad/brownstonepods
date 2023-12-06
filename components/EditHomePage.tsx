@@ -1,76 +1,77 @@
 "use client";
 
 import { toast } from "sonner";
-import { createSite } from "@/lib/actions";
-import { useRouter } from "next/navigation";
-import { useFormStatus } from "react-dom";
+import { updateSiteHome } from "@/lib/actions";
+import { useParams, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import LoadingDots from "@/components/icons/loading-dots";
-import { useModal } from "./provider";
 import va from "@vercel/analytics";
 import { useEffect, useState } from "react";
+import { useFormStatus } from "react-dom";
 
-export default function CreateSiteModal() {
+const EditHomePage = ({ homeData }: any) => {
   const router = useRouter();
-  const modal = useModal();
+  const { id } = useParams() as { id?: string };
 
   const [data, setData] = useState({
-    name: "",
-    subdomain: "",
-    description: "",
-    address: "",
-    rentRate: undefined as any,
-    mainImage: "",
+    name: homeData?.name,
+    subdomain: homeData?.subdomain,
+    description: homeData?.description,
+    address: homeData?.address,
+    rentRate: homeData?.rentRate,
+    mainImage: homeData?.mainImage,
   });
 
   useEffect(() => {
     setData((prev) => ({
       ...prev,
-      subdomain: prev.name
+      subdomain: prev?.name
         .toLowerCase()
         .trim()
         .replace(/[\W_]+/g, "-"),
     }));
   }, [data.name]);
-
   return (
     <form
-      action={async (data: FormData) =>
-        createSite(data).then((res: any) => {
+      onSubmit={async (event) => {
+        event.preventDefault();
+        console.log("inside form action data: ", data);
+
+        return updateSiteHome(data, id as string, null).then((res: any) => {
           if (res.error) {
             toast.error(res.error);
           } else {
-            va.track("Created Site");
-            const { id } = res;
+            va.track("Updated Site");
+            console.log("updated site: ", data);
+            console.log("updated site res: ", res);
+
             router.refresh();
-            router.push(`/site/${id}`);
-            modal?.hide();
-            toast.success(`Successfully created site!`);
+            toast.success(`Successfully updated site!`);
           }
-        })
-      }
-      className="w-full rounded-md bg-white dark:bg-black md:max-w-2xl md:border md:border-stone-200 md:shadow dark:md:border-stone-700"
+        });
+      }}
+      className="dark:bg-surface-mixed-100 w-full md:max-w-4xl "
     >
       <div className="relative flex flex-col space-y-4 p-5 md:p-10">
-        <h2 className="font-cal text-2xl dark:text-white">Create a new Home</h2>
+        <h2 className="font-cal text-2xl dark:text-white">Edit Home</h2>
 
         <div className="flex flex-col space-y-2">
           <label
             htmlFor="name"
             className="text-sm font-medium text-stone-500 dark:text-stone-400"
           >
-            Home Name
+            Site Name
           </label>
           <input
             name="name"
             type="text"
-            placeholder="My Awesome Site"
+            placeholder="home location name"
             autoFocus
             value={data.name}
             onChange={(e) => setData({ ...data, name: e.target.value })}
             maxLength={32}
             required
-            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+            className="dark:bg-surface-mixed-300 w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
           />
         </div>
 
@@ -92,7 +93,7 @@ export default function CreateSiteModal() {
               pattern="[a-zA-Z0-9\-]+" // only allow lowercase letters, numbers, and dashes
               maxLength={32}
               required
-              className="w-full rounded-l-lg border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+              className="dark:bg-surface-mixed-300 w-full rounded-l-lg border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
             />
             <div className="bg-surface-mixed-200 flex items-center rounded-r-lg border border-l-0 border-stone-200 px-3 text-sm dark:border-stone-600 dark:bg-stone-800 dark:text-stone-400">
               .{process.env.NEXT_PUBLIC_ROOT_DOMAIN}
@@ -114,7 +115,7 @@ export default function CreateSiteModal() {
             onChange={(e) => setData({ ...data, description: e.target.value })}
             maxLength={140}
             rows={3}
-            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black  focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+            className="dark:bg-surface-mixed-300 w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400  focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
           />
         </div>
 
@@ -132,7 +133,7 @@ export default function CreateSiteModal() {
             onChange={(e) => setData({ ...data, address: e.target.value })}
             maxLength={140}
             rows={3}
-            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black  focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+            className="dark:bg-surface-mixed-300 w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400  focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
           />
         </div>
 
@@ -154,29 +155,34 @@ export default function CreateSiteModal() {
             }
             maxLength={32}
             required
-            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+            className="dark:bg-surface-mixed-300 w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
           />
         </div>
-      </div>
-      <div className="flex items-center justify-end rounded-b-lg border-t border-stone-200 bg-stone-50 p-3 dark:border-stone-700 dark:bg-stone-800 md:px-10">
-        <CreateSiteFormButton />
+        <div className="flex flex-grow-0 flex-col">
+          <div>
+            <EditHomeFormButton />
+          </div>
+        </div>
       </div>
     </form>
   );
-}
-function CreateSiteFormButton() {
+};
+
+export default EditHomePage;
+
+function EditHomeFormButton() {
   const { pending } = useFormStatus();
   return (
     <button
       className={cn(
-        "flex h-10 w-full items-center justify-center space-x-2 rounded-md border text-sm transition-all focus:outline-none",
+        "flex h-10 flex-grow-0 items-center justify-center space-x-2 rounded-md border px-4 text-sm transition-all focus:outline-none",
         pending
           ? "bg-surface-mixed-200 cursor-not-allowed border-stone-200 text-stone-400 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-300"
-          : "border-black bg-black text-white hover:bg-white hover:text-black dark:border-stone-700 dark:hover:border-stone-200 dark:hover:bg-black dark:hover:text-white dark:active:bg-stone-800",
+          : "bg-surface-mixed-200 dark:hover:bg-surface-mixed-300 border-black text-white hover:bg-white hover:text-black dark:border-stone-700 dark:hover:border-stone-200 dark:hover:text-white dark:active:bg-stone-800",
       )}
       disabled={pending}
     >
-      {pending ? <LoadingDots color="#808080" /> : <p>Create Home</p>}
+      {pending ? <LoadingDots color="#808080" /> : <p>Save</p>}
     </button>
   );
 }

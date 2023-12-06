@@ -10,7 +10,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           <Profile />
         </Suspense>
       </Nav>
-      <div className="dark:bg-brown bg-brown min-h-screen dark:text-black sm:pl-60">
+      <div className="dark:bg-surface-mixed-100 bg-surface-mixed-100 min-h-screen dark:text-black sm:pl-60">
         {children}
       </div>
     </div>

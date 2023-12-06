@@ -128,7 +128,7 @@ export default async function SitePostPage({
                   width={80}
                 />
               ) : (
-                <div className="absolute flex h-full w-full select-none items-center justify-center bg-stone-100 text-4xl text-stone-500">
+                <div className="bg-surface-mixed-200 absolute flex h-full w-full select-none items-center justify-center text-4xl text-stone-500">
                   ?
                 </div>
               )}

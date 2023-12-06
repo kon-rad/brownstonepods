@@ -5,25 +5,28 @@ import Posts from "@/components/posts";
 import Link from "next/link";
 import PlaceholderCard from "@/components/placeholder-card";
 import OverviewSitesCTA from "@/components/overview-sites-cta";
+import CreateSiteButton from "@/components/create-site-button";
+import CreateSiteModal from "@/components/modal/create-site";
 
 export default function Overview() {
   return (
     <div className="flex max-w-screen-xl flex-col space-y-12 p-8">
-      <div className="flex flex-col space-y-6">
+      {/* <div className="flex flex-col space-y-6">
         <h1 className="font-cal text-3xl font-bold dark:text-white">
           Notifications
         </h1>
         <Notifications />
-      </div>
+      </div> */}
 
       <div className="flex flex-col space-y-6">
         <div className="flex items-center justify-between">
-          <h1 className="font-cal text-3xl font-bold dark:text-white">
-            Homes
-          </h1>
-          <Suspense fallback={null}>
+          <h1 className="font-cal text-3xl font-bold dark:text-white">Homes</h1>
+          {/* <Suspense fallback={null}>
             <OverviewSitesCTA />
-          </Suspense>
+          </Suspense> */}
+          <CreateSiteButton>
+            <CreateSiteModal />
+          </CreateSiteButton>
         </div>
         <Suspense
           fallback={
@@ -38,7 +41,7 @@ export default function Overview() {
         </Suspense>
       </div>
 
-      <div className="flex flex-col space-y-6">
+      {/* <div className="flex flex-col space-y-6">
         <h1 className="font-cal text-3xl font-bold dark:text-white">
           Recent Posts
         </h1>
@@ -53,7 +56,7 @@ export default function Overview() {
         >
           <Posts limit={8} />
         </Suspense>
-      </div>
+      </div> */}
     </div>
   );
 }

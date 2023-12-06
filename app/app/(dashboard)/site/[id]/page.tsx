@@ -3,8 +3,7 @@ import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import Posts from "@/components/posts";
 import CreatePostButton from "@/components/create-post-button";
-import EditHomeButton from "@/components/edit-home-button";
-import EditHomeModal from "@/components/modal/edit-home";
+import HomeProfile from "@/components/HomeProfile";
 
 export default async function SitePosts({
   params,
@@ -26,29 +25,28 @@ export default async function SitePosts({
   }
 
   const url = `${data.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;
+  console.log("data: ", data);
+  console.log("url: ", url);
 
-  // This page is viewable by all
   return (
     <>
       <>
         <div className="flex flex-col items-center justify-between space-y-4 sm:flex-row sm:space-y-0">
           <div className="flex flex-col items-center space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
-            <h1 className="w-60 truncate font-cal text-xl font-bold dark:text-white sm:w-auto sm:text-3xl">
-              Profile for {data.name}
+            <h1 className="w-60 truncate font-cal text-4xl font-bold dark:text-white sm:w-auto sm:text-3xl">
+              {data.name}
             </h1>
           </div>
-          <EditHomeButton>
-            <EditHomeModal />
-          </EditHomeButton>
         </div>
+        <HomeProfile data={data} />
         {/* display home profile information */}
         {/* address */}
         {/* number of Pods */}
         {/* number of Occupied Pods */}
         {/* Members directory */}
       </>
-      <>
-        <div className="flex flex-col items-center justify-between space-y-4 sm:flex-row sm:space-y-0">
+      {/* <> */}
+      {/* <div className="flex flex-col items-center justify-between space-y-4 sm:flex-row sm:space-y-0">
           <div className="flex flex-col items-center space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
             <h1 className="w-60 truncate font-cal text-xl font-bold dark:text-white sm:w-auto sm:text-3xl">
               All Blog Posts for {data.name}
@@ -61,7 +59,7 @@ export default async function SitePosts({
               }
               target="_blank"
               rel="noreferrer"
-              className="truncate rounded-md bg-stone-100 px-2 py-1 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-400 dark:hover:bg-stone-700"
+              className="truncate rounded-md bg-surface-mixed-200 px-2 py-1 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-400 dark:hover:bg-stone-700"
             >
               {url} ↗
             </a>
@@ -69,7 +67,7 @@ export default async function SitePosts({
           <CreatePostButton />
         </div>
         <Posts siteId={decodeURIComponent(params.id)} />
-      </>
+      </> */}
     </>
   );
 }

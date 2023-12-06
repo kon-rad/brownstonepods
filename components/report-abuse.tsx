@@ -59,7 +59,7 @@ export default function ReportAbuse() {
                 id="url"
                 readOnly
                 value={url}
-                className="block w-full cursor-not-allowed rounded-md border border-stone-200 bg-stone-100 py-1.5 text-stone-900 shadow-sm ring-0 focus:outline-none sm:text-sm sm:leading-6"
+                className="bg-surface-mixed-200 block w-full cursor-not-allowed rounded-md border border-stone-200 py-1.5 text-stone-900 shadow-sm ring-0 focus:outline-none sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -78,7 +78,7 @@ function SubmitButton() {
       className={cn(
         "h flex h-8 w-full items-center justify-center space-x-2 rounded-md border text-sm transition-all focus:outline-none sm:h-10",
         pending
-          ? "cursor-not-allowed border-stone-200 bg-stone-100 text-stone-400"
+          ? "bg-surface-mixed-200 cursor-not-allowed border-stone-200 text-stone-400"
           : "border-black bg-black text-white hover:bg-white hover:text-black",
       )}
       disabled={pending}

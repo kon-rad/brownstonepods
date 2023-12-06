@@ -38,8 +38,8 @@ export default async function SiteHomePage({
 }: {
   params: { domain: string };
 }) {
-  console.log('in app domain page');
-  
+  console.log("in app domain page");
+
   const domain = decodeURIComponent(params.domain);
   const [data, posts] = await Promise.all([
     getSiteData(domain),
@@ -49,7 +49,6 @@ export default async function SiteHomePage({
   if (!data) {
     notFound();
   }
-
 
   return (
     <>
@@ -86,7 +85,7 @@ export default async function SiteHomePage({
                         src={data.user?.image}
                       />
                     ) : (
-                      <div className="absolute flex h-full w-full select-none items-center justify-center bg-stone-100 text-4xl text-stone-500">
+                      <div className="bg-surface-mixed-200 absolute flex h-full w-full select-none items-center justify-center text-4xl text-stone-500">
                         ?
                       </div>
                     )}

@@ -20,6 +20,31 @@ module.exports = {
         "light-brown": "#E7DBCD",
         "dark-brown": "#29160a",
 
+        /** CSS TEXT COLORS */
+        'primary-gray': '#8b8b8b',
+        /** CSS DARK THEME PRIMARY COLORS */
+        "primary-100": "#c28257",
+        "primary-200": "#ca8f69",
+        "primary-300": "#d29d7a",
+        "primary-400": "#d9aa8c",
+        "primary-500": "#e0b89f",
+        "primary-600": "#e7c6b1",
+
+        /** CSS DARK THEME SURFACE COLORS */
+        "surface-100": "#121212",
+        "surface-200": "#282828",
+        "surface-300": "#3f3f3f",
+        "surface-400": "#575757",
+        "surface-500": "#717171",
+        "surface-600": "#8b8b8b",
+
+        /** CSS DARK THEME MIXED SURFACE COLORS */
+        "surface-mixed-100": "#221c19",
+        "surface-mixed-200": "#37312e",
+        "surface-mixed-300": "#4d4744",
+        "surface-mixed-400": "#645f5c",
+        "surface-mixed-500": "#7c7775",
+        "surface-mixed-600": "#95918f",
         // light mode
         tremor: {
           brand: {
