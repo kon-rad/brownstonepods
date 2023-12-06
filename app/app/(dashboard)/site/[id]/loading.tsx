@@ -1,14 +1,12 @@
-// a bunch of loading divs
-
-import PlaceholderCard from "@/components/placeholder-card";
+import LoadingDots from "@/components/icons/loading-dots";
+import { PiSpinnerGapLight } from "react-icons/pi";
 
 export default function Loading() {
   return (
     <>
-      <div className="flex justify-center">loading</div>
-      {/* <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        loading
-      </div> */}
+      <div className="mt-28 flex h-full w-full items-center justify-center ">
+        <PiSpinnerGapLight className="animate-spin text-white" />
+      </div>
     </>
   );
 }

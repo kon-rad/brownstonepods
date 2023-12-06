@@ -261,6 +261,26 @@ export const getSiteFromPostId = async (postId: string) => {
   return post?.siteId;
 };
 
+// export const updatePost = async (data: Post) => {
+export const createAwesomePost = withSiteAuth(async (data: any, id: any) => {
+  const session = await getSession();
+  console.log("createAwesomePost: ", data);
+
+  if (!session?.user.id) {
+    return {
+      error: "Not authenticated",
+    };
+  }
+  const response = await prisma.starsPost.create({
+    data: {
+      comment: data.comment,
+      givenToId: data.to,
+      givenById: session.user.id,
+    },
+  });
+
+  return response;
+});
 export const createPost = withSiteAuth(async (_: FormData, site: Site) => {
   const session = await getSession();
   if (!session?.user.id) {

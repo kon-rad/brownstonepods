@@ -1,6 +1,8 @@
 import prisma from "@/lib/prisma";
 import Form from "@/components/form";
 import { updateSite } from "@/lib/actions";
+import ImageUpload from "@/components/ImageUpload";
+import ImagesUploader from "@/components/ImagesUploader";
 
 export default async function SiteSettingsAppearance({
   params,
@@ -26,6 +28,18 @@ export default async function SiteSettingsAppearance({
         }}
         handleSubmit={updateSite}
       />
+      {/* <div className="flex flex-wrap space-x-4">
+        <div className="flex w-1/3 p-2">
+          <ImagesUploader name="image1" defaultValue={data.image1} />
+        </div>
+        <div className="flex w-1/3 p-2">
+          <ImagesUploader name="image2" defaultValue={data.image2} />
+        </div>
+        <div className="flex w-1/3 p-2">
+          <ImagesUploader name="image3" defaultValue={data.image3} />
+        </div>
+      </div>
+      <ImageUpload /> */}
       <Form
         title="Logo"
         description="The logo for your site. Accepted formats: .png, .jpg, .jpeg"

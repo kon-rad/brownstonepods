@@ -3,6 +3,7 @@
  */
 module.exports = {
   experimental: {
+    runtime: 'experimental-edge',
     serverActions: {
       allowedOrigins: ["app.localhost:8888", "app.localhost:8888", "app.localhost:3000", "app.localhost:3000"],
     },

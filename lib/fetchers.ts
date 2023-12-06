@@ -23,6 +23,57 @@ export async function getSiteData(domain: string) {
   )();
 }
 
+export async function getAllUsers() {
+  return await prisma.user.findMany({
+    select: {
+      id: true,
+      name: true,
+      role: true,
+      total_stars: true,
+      username: true,
+      gh_username: true,
+      g_username: true,
+      email: true,
+      emailVerified: true,
+      image: true,
+      createdAt: true,
+      updatedAt: true,
+      // Include any other fields you need
+    },
+  });
+}
+
+interface StarsPostData {
+  givenById: string;
+  givenToId: string;
+  comment: string;
+  likes?: number; // Optional, defaults to 0 if not provided
+}
+
+export async function createStarsPost(data: StarsPostData) {
+  return await prisma.starsPost.create({
+    data: {
+      givenById: data.givenById,
+      givenToId: data.givenToId,
+      comment: data.comment,
+      likes: data.likes || 0, // Default to 0 if not provided
+    },
+  });
+}
+
+export async function getAllStarsPosts() {
+  return await prisma.starsPost.findMany({
+    select: {
+      givenBy: true, // Include details of the user who gave the stars
+      givenById: true, // Include details of the user who gave the stars
+      givenTo: true, // Include details of the user who received the stars
+      givenToId: true, // Include details of the user who received the stars
+      comment: true,
+      likes: true,
+    },
+  });
+}
+
 export async function getPostsForSite(domain: string) {
   const subdomain = domain.endsWith(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`)
     ? domain.replace(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`, "")

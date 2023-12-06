@@ -55,7 +55,7 @@ const EditHomePage = ({ homeData }: any) => {
       <div className="relative flex flex-col space-y-4 py-5 md:py-10">
         <h2 className="font-cal text-2xl dark:text-white">Edit Home Profile</h2>
 
-        <div className="flex flex-col space-y-2">
+        <div className="flex flex-colbg- space-y-2">
           <label
             htmlFor="name"
             className="text-sm font-medium text-stone-500 dark:text-stone-400"
@@ -113,8 +113,8 @@ const EditHomePage = ({ homeData }: any) => {
             placeholder="Description about why my site is so awesome"
             value={data.description}
             onChange={(e) => setData({ ...data, description: e.target.value })}
-            maxLength={140}
-            rows={3}
+            maxLength={1500}
+            rows={15}
             className="dark:bg-surface-mixed-300 dark:placeholder-surface-100 w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600  placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:text-white dark:focus:ring-white"
           />
         </div>

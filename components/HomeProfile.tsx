@@ -4,7 +4,6 @@ import BlurImage from "@/components/blur-image";
 import { placeholderBlurhash, random } from "@/lib/utils";
 import ImageGallery from "@/components/ImageGallery";
 
-
 const HomeProfile = ({ data }: any) => {
   // This page is viewable by all
   const availableBeds = data.totalBeds - data.occupiedBeds || 0;
@@ -21,7 +20,7 @@ const HomeProfile = ({ data }: any) => {
     { url: "/path/to/image5.jpg", alt: "Image 5" },
   ];
   return (
-    <div className="flex flex-col">
+    <div className="dark:bg-surface-mixed-100 bg-surface-mixed-100 flex flex-col">
       <div className="mb-6 flex flex-col md:flex-row">
         <BlurImage
           alt={data.name ?? "Card thumbnail"}
@@ -39,15 +38,15 @@ const HomeProfile = ({ data }: any) => {
             <h3 className="dark:text-primary-gray mr-4 text-xl">rent:</h3>
             <p className="text-xl dark:text-white">${data.rentRate}</p>
           </div>
-          <div className="mb-6 mt-2 flex ">
+          {/* <div className="mb-6 mt-2 flex ">
             <h3 className=" dark:text-primary-gray mr-4 text-xl">
               availability:
             </h3>
             <p className="text-xl dark:text-white">{availableBeds}</p>
-          </div>
+          </div> */}
           <button
             onClick={handleApply}
-            className="active:bg-surface-mixed-200 rounded-lg border border-black bg-black px-4 py-1.5 text-sm font-medium text-white transition-all hover:bg-white hover:text-black dark:border-stone-700 dark:hover:border-stone-200 dark:hover:bg-black dark:hover:text-white dark:active:bg-stone-800"
+            className="active:bg-surface-mixed-200 bg-surface-mixed-200 border-surface-mixed-200 dark:hover:bg-surface-mixed-300 dark:hover:bg-surface-mixed-300 rounded-lg border px-4 py-1.5 text-sm font-medium text-white transition-all dark:border-stone-700 dark:hover:text-white dark:active:bg-stone-800"
           >
             Apply for Residency
           </button>
@@ -56,17 +55,17 @@ const HomeProfile = ({ data }: any) => {
       <div className="flex flex-col md:flex-row">
         <div className="flex flex-col">
           <h3 className="dark:text-primary-gray mb-2 text-xl">description:</h3>
-          <p className="text-md mb-6 mt-2 line-clamp-1 font-normal leading-snug dark:text-white">
+          <p className="text-md mb-6 mt-2 font-normal leading-snug dark:text-white">
             {data.description}
           </p>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row">
+      {/* <div className="flex flex-col md:flex-row">
         <div className="flex flex-col">
-          <h3 className="mb-2 text-xl dark:text-white">photo gallery:</h3>
+          <h3 className="mb-2 text-2xl dark:text-white">Photo Gallery</h3>
           <ImageGallery images={images} />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

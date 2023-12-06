@@ -20,6 +20,7 @@ import { FaMap } from "react-icons/fa";
 import { FaCity } from "react-icons/fa";
 import { IoIosBed } from "react-icons/io";
 import { IoBook } from "react-icons/io5";
+import { RiAdminFill } from "react-icons/ri";
 import {
   useParams,
   usePathname,
@@ -84,16 +85,22 @@ export default function Nav({ children }: { children: ReactNode }) {
           icon: <Settings width={18} />,
         },
         {
-          name: "Community Portal",
+          name: "Community Handbook",
+          href: `/site/${id}/handbook`,
+          isActive: segments.includes("handbook"),
+          icon: <IoBook width={18} />,
+        },
+        {
+          name: "Resident Portal",
           href: `/site/${id}/portal`,
           isActive: segments.includes("portal"),
           icon: <FaUsers width={18} />,
         },
         {
-          name: "Community Handbook",
-          href: `/site/${id}/handbook`,
-          isActive: segments.includes("handbook"),
-          icon: <IoBook width={18} />,
+          name: "Admin Portal",
+          href: `/site/${id}/admin`,
+          isActive: segments.includes("admin"),
+          icon: <RiAdminFill width={18} />,
         },
       ];
     } else if (segments[0] === "post" && id) {
