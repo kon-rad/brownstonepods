@@ -68,7 +68,7 @@ export default async function SiteAnalytics({
               return (
                 <div
                   key={`user_${i}`}
-                  className="bg-surface-mixed-200 flex flex-row rounded-2xl p-2"
+                  className="bg-surface-mixed-200 m-2 flex w-1/3 flex-row rounded-2xl p-2"
                 >
                   <div className="p-2">
                     <img
