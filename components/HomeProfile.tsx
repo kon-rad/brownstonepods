@@ -2,7 +2,8 @@
 
 import BlurImage from "@/components/blur-image";
 import { placeholderBlurhash, random } from "@/lib/utils";
-import PhotoGallery from "@/components/PhotoGallery";
+import ImageGallery from "@/components/ImageGallery";
+
 
 const HomeProfile = ({ data }: any) => {
   // This page is viewable by all
@@ -12,9 +13,16 @@ const HomeProfile = ({ data }: any) => {
       "https://brownstone.live/apply?from=&to=&due_amount=&total=&location=pa";
     window.open(url, "_blank");
   };
+  const images = [
+    { url: "/path/to/image1.jpg", alt: "Image 1" },
+    { url: "/path/to/image2.jpg", alt: "Image 2" },
+    { url: "/path/to/image3.jpg", alt: "Image 3" },
+    { url: "/path/to/image4.jpg", alt: "Image 4" },
+    { url: "/path/to/image5.jpg", alt: "Image 5" },
+  ];
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col md:flex-row mb-6">
+      <div className="mb-6 flex flex-col md:flex-row">
         <BlurImage
           alt={data.name ?? "Card thumbnail"}
           width={500}
@@ -56,7 +64,7 @@ const HomeProfile = ({ data }: any) => {
       <div className="flex flex-col md:flex-row">
         <div className="flex flex-col">
           <h3 className="mb-2 text-xl dark:text-white">photo gallery:</h3>
-          <PhotoGallery />
+          <ImageGallery images={images} />
         </div>
       </div>
     </div>

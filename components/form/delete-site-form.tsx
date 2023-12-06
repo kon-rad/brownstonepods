@@ -28,7 +28,7 @@ export default function DeleteSiteForm({ siteName }: { siteName: string }) {
           })
           .catch((err: Error) => toast.error(err.message))
       }
-      className="rounded-lg border border-red-600 bg-white dark:bg-black"
+      className="dark:bg-surface-mixed-100 bg-surface-mixed-100 rounded-lg border border-red-600"
     >
       <div className="relative flex flex-col space-y-4 p-5 sm:p-10">
         <h2 className="font-cal text-xl dark:text-white">Delete Site</h2>
@@ -43,7 +43,7 @@ export default function DeleteSiteForm({ siteName }: { siteName: string }) {
           required
           pattern={siteName}
           placeholder={siteName}
-          className="w-full max-w-md rounded-md border border-stone-300 text-sm text-stone-900 placeholder-stone-300 focus:border-stone-500 focus:outline-none focus:ring-stone-500 dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700"
+          className="dark:bg-surface-mixed-300 placeholder-surface-100 dark:placeholder-surface-100 w-full max-w-md rounded-md border border-stone-300 text-sm text-stone-900 focus:border-stone-500 focus:outline-none focus:ring-stone-500 dark:border-stone-600 dark:text-white"
         />
       </div>
 

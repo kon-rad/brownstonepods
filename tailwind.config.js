@@ -44,7 +44,8 @@ module.exports = {
         "surface-mixed-300": "#4d4744",
         "surface-mixed-400": "#645f5c",
         "surface-mixed-500": "#7c7775",
-        "surface-mixed-600": "#95918f",
+        "surface-mixed-600": "#6d0f0f",
+        "red-600": "#dc2626",
         // light mode
         tremor: {
           brand: {

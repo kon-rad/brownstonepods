@@ -57,7 +57,7 @@ export default function EditHomeModal({ homeData }: any) {
       className="w-full rounded-md bg-white dark:bg-black md:max-w-4xl md:border md:border-stone-200 md:shadow dark:md:border-stone-700"
     >
       <div className="relative flex flex-col space-y-4 p-5 md:p-10">
-        <h2 className="font-cal text-2xl dark:text-white">Edit Home</h2>
+        <h2 className="font-cal text-2xl dark:text-white">Edit Home Profile</h2>
 
         <div className="flex flex-col space-y-2">
           <label

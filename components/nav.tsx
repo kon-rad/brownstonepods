@@ -19,6 +19,7 @@ import { FaUsers } from "react-icons/fa";
 import { FaMap } from "react-icons/fa";
 import { FaCity } from "react-icons/fa";
 import { IoIosBed } from "react-icons/io";
+import { IoBook } from "react-icons/io5";
 import {
   useParams,
   usePathname,
@@ -87,6 +88,12 @@ export default function Nav({ children }: { children: ReactNode }) {
           href: `/site/${id}/portal`,
           isActive: segments.includes("portal"),
           icon: <FaUsers width={18} />,
+        },
+        {
+          name: "Community Handbook",
+          href: `/site/${id}/handbook`,
+          isActive: segments.includes("handbook"),
+          icon: <IoBook width={18} />,
         },
       ];
     } else if (segments[0] === "post" && id) {

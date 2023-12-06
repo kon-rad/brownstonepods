@@ -127,6 +127,21 @@ model Site {
   state         String?
   zipCode       String?
   aptNumber     String?
+  
+  image1        String?
+  image1Caption String?
+  image2        String?
+  image2Caption String?
+  image3        String?
+  image3Caption String?
+  image4        String?
+  image4Caption String?
+  image5        String?
+  image5Caption String?
+  image6        String?
+  image6Caption String?
+  image7        String?
+  image7Caption String?
 
   @@index([userId])
 }
