@@ -52,7 +52,7 @@ export default function AwesomePostModal({ homeData, users }: any) {
           }
         });
       }}
-      className="bg-surface-mixed-100 dark:bg-surface-mixed-100 w-full rounded-md md:max-w-2xl md:border md:border-stone-200 md:shadow dark:md:border-stone-700"
+      className="bg-black dark:bg-black w-full rounded-md md:max-w-2xl md:border md:border-stone-200 md:shadow dark:md:border-stone-700"
     >
       <div className="relative flex flex-col space-y-4 p-5 md:p-10">
         <h2 className="font-cal text-2xl dark:text-white">

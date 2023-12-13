@@ -18,7 +18,7 @@ export default async function DashboardLayout({
           <Profile />
         </Suspense>
       </Nav>
-      <div className="min-h-screen bg-surface-mixed-100 dark:bg-black dark:text-black sm:pl-60">
+      <div className="min-h-screen bg-black dark:bg-black dark:text-black sm:pl-60">
         {children}
       </div>
     </div>

@@ -84,7 +84,7 @@ export default async function SiteLayout({
     <div
       className={`${
         fontMapper[data.font]
-      } bg-surface-mixed-100 dark:bg-surface-mixed-100`}
+      } bg-black dark:bg-black`}
     >
       <div className="mx-auto flex max-w-screen-xl pt-20">{children}</div>
       {/* <div className="flex">
