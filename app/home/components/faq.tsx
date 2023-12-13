@@ -30,7 +30,7 @@ const FAQ = () => {
   // ### How to start your own Pods Site
 
   // - login to app.brownstonepods.com
-  // - click on 'Contact us to start your own Pods Coliving Site'
+  // - click on 'Contact us to start your own Pods shared living Site'
   // - Fill out the form
   // - You will recieve an email to schedule a call with Brownstone Pods team
   // - We will work with you to install the pods in your location and configure your own portal with a unique subdomain, e.g. zion.brownstone.pods

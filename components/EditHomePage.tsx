@@ -50,12 +50,12 @@ const EditHomePage = ({ homeData }: any) => {
           }
         });
       }}
-      className="dark:bg-surface-mixed-100 w-full md:max-w-4xl "
+      className="w-full dark:bg-black md:max-w-4xl "
     >
       <div className="relative flex flex-col space-y-4 py-5 md:py-10">
         <h2 className="font-cal text-2xl dark:text-white">Edit Home Profile</h2>
 
-        <div className="flex flex-colbg- space-y-2">
+        <div className="flex-colbg- flex space-y-2">
           <label
             htmlFor="name"
             className="text-sm font-medium text-stone-500 dark:text-stone-400"
@@ -71,7 +71,7 @@ const EditHomePage = ({ homeData }: any) => {
             onChange={(e) => setData({ ...data, name: e.target.value })}
             maxLength={32}
             required
-            className="dark:bg-surface-mixed-300 dark:placeholder-surface-100 w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:text-white dark:focus:ring-white"
+            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-surface-100 dark:focus:ring-white"
           />
         </div>
 
@@ -93,9 +93,9 @@ const EditHomePage = ({ homeData }: any) => {
               pattern="[a-zA-Z0-9\-]+" // only allow lowercase letters, numbers, and dashes
               maxLength={32}
               required
-              className="dark:bg-surface-mixed-300 dark:placeholder-surface-100 w-full rounded-l-lg border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:text-white dark:focus:ring-white"
+              className="w-full rounded-l-lg border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-surface-100 dark:focus:ring-white"
             />
-            <div className="bg-surface-mixed-200 flex items-center rounded-r-lg border border-l-0 border-stone-200 px-3 text-sm dark:border-stone-600 dark:bg-stone-800 dark:text-stone-400">
+            <div className="flex items-center rounded-r-lg border border-l-0 border-stone-200 bg-surface-mixed-200 px-3 text-sm dark:border-stone-600 dark:bg-stone-800 dark:text-stone-400">
               .{process.env.NEXT_PUBLIC_ROOT_DOMAIN}
             </div>
           </div>
@@ -115,7 +115,7 @@ const EditHomePage = ({ homeData }: any) => {
             onChange={(e) => setData({ ...data, description: e.target.value })}
             maxLength={1500}
             rows={15}
-            className="dark:bg-surface-mixed-300 dark:placeholder-surface-100 w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600  placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:text-white dark:focus:ring-white"
+            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black  focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-surface-100 dark:focus:ring-white"
           />
         </div>
 
@@ -133,7 +133,7 @@ const EditHomePage = ({ homeData }: any) => {
             onChange={(e) => setData({ ...data, address: e.target.value })}
             maxLength={140}
             rows={3}
-            className="dark:bg-surface-mixed-300 dark:placeholder-surface-100 w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600  placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:text-white dark:focus:ring-white"
+            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black  focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-surface-100 dark:focus:ring-white"
           />
         </div>
 
@@ -155,7 +155,7 @@ const EditHomePage = ({ homeData }: any) => {
             }
             maxLength={32}
             required
-            className="dark:bg-surface-mixed-300 dark:placeholder-surface-100 w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:text-white dark:focus:ring-white"
+            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-surface-100 dark:focus:ring-white"
           />
         </div>
         <div className="flex flex-grow-0 flex-col">
@@ -177,8 +177,8 @@ function EditHomeFormButton() {
       className={cn(
         "flex h-10 flex-grow-0 items-center justify-center space-x-2 rounded-md border px-4 text-sm transition-all focus:outline-none",
         pending
-          ? "bg-surface-mixed-200 cursor-not-allowed border-stone-200 text-stone-400 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-300"
-          : "bg-surface-mixed-200 dark:hover:bg-surface-mixed-300 border-black text-white hover:bg-white hover:text-black dark:border-stone-700 dark:hover:border-stone-200 dark:hover:text-white dark:active:bg-stone-800",
+          ? "cursor-not-allowed border-stone-200 bg-surface-mixed-200 text-stone-400 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-300"
+          : "border-black bg-surface-mixed-200 text-white hover:bg-white hover:text-black dark:border-stone-700 dark:hover:border-stone-200 dark:hover:bg-surface-mixed-300 dark:hover:text-white dark:active:bg-stone-800",
       )}
       disabled={pending}
     >

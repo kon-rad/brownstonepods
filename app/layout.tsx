@@ -9,7 +9,7 @@ import React from "react";
 const title =
   "Brownstone Pods – The place for pioneers, adventureres and world travellers.";
 const description =
-  "The Brownstone Pods is an Ai first platform for hosting your own Pods Coliving Apartmnet, where global citizens rent month to month and are accomodated by an innovatie Ai community manager.";
+  "The Brownstone Pods is an Ai first platform for hosting your own Pods shared living Apartmnet, where global citizens rent month to month and are accomodated by an innovatie Ai community manager.";
 const image = "/brownstone-logo.png";
 
 export const metadata: Metadata = {

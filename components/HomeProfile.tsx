@@ -20,7 +20,7 @@ const HomeProfile = ({ data }: any) => {
     { url: "/path/to/image5.jpg", alt: "Image 5" },
   ];
   return (
-    <div className="dark:bg-surface-mixed-100 bg-surface-mixed-100 flex flex-col">
+    <div className="flex flex-col bg-black dark:bg-black">
       <div className="mb-6 flex flex-col md:flex-row">
         <BlurImage
           alt={data.name ?? "Card thumbnail"}
@@ -32,10 +32,10 @@ const HomeProfile = ({ data }: any) => {
           blurDataURL={data.imageBlurhash ?? placeholderBlurhash}
         />
         <div className="p-4 pt-0 dark:border-stone-700">
-          <h3 className="dark:text-primary-gray mb-2 text-xl">location:</h3>
+          <h3 className="mb-2 text-xl dark:text-primary-gray">location:</h3>
           <p className="mb-6 mt-2 text-xl dark:text-white">{data.address}</p>
           <div className="mb-6 mt-2 flex ">
-            <h3 className="dark:text-primary-gray mr-4 text-xl">rent:</h3>
+            <h3 className="mr-4 text-xl dark:text-primary-gray">rent:</h3>
             <p className="text-xl dark:text-white">${data.rentRate}</p>
           </div>
           {/* <div className="mb-6 mt-2 flex ">
@@ -46,7 +46,7 @@ const HomeProfile = ({ data }: any) => {
           </div> */}
           <button
             onClick={handleApply}
-            className="active:bg-surface-mixed-200 bg-surface-mixed-200 border-surface-mixed-200 dark:hover:bg-surface-mixed-300 dark:hover:bg-surface-mixed-300 rounded-lg border px-4 py-1.5 text-sm font-medium text-white transition-all dark:border-stone-700 dark:hover:text-white dark:active:bg-stone-800"
+            className="rounded-lg border border-surface-mixed-200 bg-surface-mixed-200 px-4 py-1.5 text-sm font-medium text-white transition-all active:bg-surface-mixed-200 dark:border-stone-700 dark:hover:bg-surface-mixed-300 dark:hover:bg-surface-mixed-300 dark:hover:text-white dark:active:bg-stone-800"
           >
             Apply for Residency
           </button>
@@ -54,7 +54,7 @@ const HomeProfile = ({ data }: any) => {
       </div>
       <div className="flex flex-col md:flex-row">
         <div className="flex flex-col">
-          <h3 className="dark:text-primary-gray mb-2 text-xl">description:</h3>
+          <h3 className="mb-2 text-xl dark:text-primary-gray">description:</h3>
           <p className="text-md mb-6 mt-2 font-normal leading-snug dark:text-white">
             {data.description}
           </p>

@@ -24,7 +24,9 @@ export default function LoginButton({ type, label, icon }: any) {
     <>
       {type === "email" && (
         <div className="my-4 flex flex-col">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email" className="my-3 dark:text-white">
+            Email
+          </label>
           <input
             id="email"
             type="email"
@@ -32,6 +34,7 @@ export default function LoginButton({ type, label, icon }: any) {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
             required
+            className="rounded-lg border "
           />
         </div>
       )}
@@ -59,7 +62,7 @@ export default function LoginButton({ type, label, icon }: any) {
         className={`${
           loading
             ? "cursor-not-allowed bg-stone-50 dark:bg-stone-800"
-            : "active:bg-surface-mixed-200 bg-white hover:bg-stone-50 dark:bg-black dark:hover:border-white dark:hover:bg-black"
+            : "bg-white hover:bg-stone-50 active:bg-surface-mixed-200 dark:bg-black dark:hover:border-white dark:hover:bg-black"
         } group  my-2 flex h-10 w-full items-center justify-center space-x-2 rounded-md border border-stone-200 text-stone-600 transition-colors duration-75 focus:outline-none dark:border-stone-700`}
       >
         {loading ? (
