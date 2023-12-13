@@ -1,8 +1,12 @@
 import { ReactNode, Suspense } from "react";
 import Profile from "@/components/profile";
 import Nav from "@/components/nav";
+import { isUserOwnerAuth } from "@/lib/auth";
 
-export default function DashboardLayout({ children }: { children: ReactNode }) {
+export default async function DashboardLayout({ children }: { children: ReactNode }) {
+  const isOwner = await isUserOwnerAuth();
+  console.log("isOwner: ", isOwner);
+
   return (
     <div>
       <Nav>

@@ -52,13 +52,13 @@ export default function HomePage() {
           className="mr-20 rounded-xl"
         />
         <div className="flex items-center justify-center">
-          <Link className="mr-8" href="https://app.brownstonepods.com">
+          <Link className="mr-8 cursor-pointer" href="https://app.brownstonepods.com">
             Go to App
           </Link>
-          <Link className="mr-8" href="https://blog.brownstonepods.com">
+          <Link className="mr-8 cursor-pointer" href="https://blog.brownstonepods.com">
             Blog
           </Link>
-          <Link className="mr-8" href="mailto:hey@brownstone.live">
+          <Link className="mr-8 cursor-pointer" href="mailto:hey@brownstone.live">
             Contact Us
           </Link>
           <Link

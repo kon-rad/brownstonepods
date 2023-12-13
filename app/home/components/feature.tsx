@@ -58,7 +58,7 @@ const Feature: React.FC<FeatureProps> = ({
         }`}
       >
         <h1 className="mb-4 w-full text-4xl font-bold ">{title}</h1>
-        <p className="w-full text-gray-700">{description}</p>
+        <p className="w-full text-gray-400">{description}</p>
         <div
           className={`flex-end flex w-full ${
             textPosition === "right" ? "justify-end" : ""

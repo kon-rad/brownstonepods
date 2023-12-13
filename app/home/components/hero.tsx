@@ -25,7 +25,7 @@ const Hero = () => {
           {subtitle}
         </motion.p>
         <a
-          href="https://your-external-url.com"
+          href="https://https://app.brownstonepods.com/login"
           className="mt-4 inline-block cursor-pointer rounded bg-primary-100 px-4 py-2 text-lg text-white hover:bg-primary-200"
           target="_blank"
           rel="noopener noreferrer"

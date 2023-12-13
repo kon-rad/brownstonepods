@@ -8,6 +8,7 @@ import FacebookProvider from "next-auth/providers/facebook";
 import AppleProvider from "next-auth/providers/apple";
 import EmailProvider from "next-auth/providers/email";
 import nodemailer from "nodemailer";
+import { isUserOwner } from "@/lib/permissions";
 
 // Create a nodemailer transport for Mailgun
 const mailgunTransport = nodemailer.createTransport({
@@ -266,4 +267,14 @@ export function withPostAuth(action: any) {
 
     return action(formData, post, key);
   };
+}
+
+export async function isUserOwnerAuth() {
+  const session = await getSession();
+  if (!session?.user.id) {
+    return {
+      error: "Not authenticated",
+    };
+  }
+  return isUserOwner(session.user.id);
 }

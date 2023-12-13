@@ -1,4 +1,6 @@
 "use client";
+import React, { useContext } from "react";
+import { GlobalStateContext } from "@/context/globalState";
 
 import Link from "next/link";
 import {
@@ -51,6 +53,7 @@ const externalLinks = [
 export default function Nav({ children }: { children: ReactNode }) {
   const segments = useSelectedLayoutSegments();
   const { id } = useParams() as { id?: string };
+  // const [isOwner, setIsOwner] = useContext(GlobalStateContext);
 
   const [siteId, setSiteId] = useState<string | null>();
 
