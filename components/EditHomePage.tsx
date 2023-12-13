@@ -71,7 +71,7 @@ const EditHomePage = ({ homeData }: any) => {
             onChange={(e) => setData({ ...data, name: e.target.value })}
             maxLength={32}
             required
-            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-surface-100 dark:focus:ring-white"
+            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-600 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-surface-100 dark:focus:ring-white"
           />
         </div>
 
@@ -93,7 +93,7 @@ const EditHomePage = ({ homeData }: any) => {
               pattern="[a-zA-Z0-9\-]+" // only allow lowercase letters, numbers, and dashes
               maxLength={32}
               required
-              className="w-full rounded-l-lg border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-surface-100 dark:focus:ring-white"
+              className="w-full rounded-l-lg border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-600 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-surface-100 dark:focus:ring-white"
             />
             <div className="flex items-center rounded-r-lg border border-l-0 border-stone-200 bg-surface-mixed-200 px-3 text-sm dark:border-stone-600 dark:bg-stone-800 dark:text-stone-400">
               .{process.env.NEXT_PUBLIC_ROOT_DOMAIN}
@@ -115,7 +115,7 @@ const EditHomePage = ({ homeData }: any) => {
             onChange={(e) => setData({ ...data, description: e.target.value })}
             maxLength={1500}
             rows={15}
-            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black  focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-surface-100 dark:focus:ring-white"
+            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-600 focus:border-black  focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-surface-100 dark:focus:ring-white"
           />
         </div>
 
@@ -133,7 +133,7 @@ const EditHomePage = ({ homeData }: any) => {
             onChange={(e) => setData({ ...data, address: e.target.value })}
             maxLength={140}
             rows={3}
-            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black  focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-surface-100 dark:focus:ring-white"
+            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-600 focus:border-black  focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-surface-100 dark:focus:ring-white"
           />
         </div>
 
@@ -155,7 +155,7 @@ const EditHomePage = ({ homeData }: any) => {
             }
             maxLength={32}
             required
-            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-surface-100 dark:focus:ring-white"
+            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-600 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-surface-100 dark:focus:ring-white"
           />
         </div>
         <div className="flex flex-grow-0 flex-col">

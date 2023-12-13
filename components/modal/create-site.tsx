@@ -70,7 +70,7 @@ export default function CreateSiteModal() {
             onChange={(e) => setData({ ...data, name: e.target.value })}
             maxLength={32}
             required
-            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-600 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
           />
         </div>
 
@@ -92,9 +92,9 @@ export default function CreateSiteModal() {
               pattern="[a-zA-Z0-9\-]+" // only allow lowercase letters, numbers, and dashes
               maxLength={32}
               required
-              className="w-full rounded-l-lg border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+              className="w-full rounded-l-lg border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-700 placeholder:text-stone-600 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
             />
-            <div className="bg-surface-mixed-200 flex items-center rounded-r-lg border border-l-0 border-stone-200 px-3 text-sm dark:border-stone-600 dark:bg-stone-800 dark:text-stone-400">
+            <div className="flex items-center rounded-r-lg border border-l-0 border-stone-200 bg-surface-mixed-200 px-3 text-sm dark:border-stone-600 dark:bg-stone-800 dark:text-stone-400">
               .{process.env.NEXT_PUBLIC_ROOT_DOMAIN}
             </div>
           </div>
@@ -114,7 +114,7 @@ export default function CreateSiteModal() {
             onChange={(e) => setData({ ...data, description: e.target.value })}
             maxLength={140}
             rows={3}
-            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black  focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-600 focus:border-black  focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
           />
         </div>
 
@@ -132,7 +132,7 @@ export default function CreateSiteModal() {
             onChange={(e) => setData({ ...data, address: e.target.value })}
             maxLength={140}
             rows={3}
-            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black  focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-600 focus:border-black  focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
           />
         </div>
 
@@ -154,7 +154,7 @@ export default function CreateSiteModal() {
             }
             maxLength={32}
             required
-            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-600 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
           />
         </div>
       </div>
@@ -171,7 +171,7 @@ function CreateSiteFormButton() {
       className={cn(
         "flex h-10 w-full items-center justify-center space-x-2 rounded-md border text-sm transition-all focus:outline-none",
         pending
-          ? "bg-surface-mixed-200 cursor-not-allowed border-stone-200 text-stone-400 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-300"
+          ? "cursor-not-allowed border-stone-200 bg-surface-mixed-200 text-stone-400 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-300"
           : "border-black bg-black text-white hover:bg-white hover:text-black dark:border-stone-700 dark:hover:border-stone-200 dark:hover:bg-black dark:hover:text-white dark:active:bg-stone-800",
       )}
       disabled={pending}

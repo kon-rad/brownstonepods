@@ -51,7 +51,7 @@ export default function Editor({ post }: { post: PostWithSite }) {
             <ExternalLink className="h-4 w-4" />
           </a>
         )}
-        <div className="bg-surface-mixed-200 rounded-lg px-2 py-1 text-sm text-stone-400 dark:bg-stone-800 dark:text-stone-500">
+        <div className="rounded-lg bg-surface-mixed-200 px-2 py-1 text-sm text-stone-400 dark:bg-stone-800 dark:text-stone-500">
           {isPendingSaving ? "Saving..." : "Saved"}
         </div>
         <button
@@ -75,8 +75,8 @@ export default function Editor({ post }: { post: PostWithSite }) {
           className={cn(
             "flex h-7 w-24 items-center justify-center space-x-2 rounded-lg border text-sm transition-all focus:outline-none",
             isPendingPublishing
-              ? "bg-surface-mixed-200 cursor-not-allowed border-stone-200 text-stone-400 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-300"
-              : "active:bg-surface-mixed-200 border border-black bg-black text-white hover:bg-white hover:text-black dark:border-stone-700 dark:hover:border-stone-200 dark:hover:bg-black dark:hover:text-white dark:active:bg-stone-800",
+              ? "cursor-not-allowed border-stone-200 bg-surface-mixed-200 text-stone-400 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-300"
+              : "border border-black bg-black text-white hover:bg-white hover:text-black active:bg-surface-mixed-200 dark:border-stone-700 dark:hover:border-stone-200 dark:hover:bg-black dark:hover:text-white dark:active:bg-stone-800",
           )}
           disabled={isPendingPublishing}
         >
@@ -94,13 +94,13 @@ export default function Editor({ post }: { post: PostWithSite }) {
           defaultValue={post?.title || ""}
           autoFocus
           onChange={(e) => setData({ ...data, title: e.target.value })}
-          className="dark:placeholder-text-600 border-none px-0 font-cal text-3xl placeholder:text-stone-400 focus:outline-none focus:ring-0 dark:bg-black dark:text-white"
+          className="dark:placeholder-text-600 border-none px-0 font-cal text-3xl placeholder:text-stone-600 focus:outline-none focus:ring-0 dark:bg-black dark:text-white"
         />
         <TextareaAutosize
           placeholder="Description"
           defaultValue={post?.description || ""}
           onChange={(e) => setData({ ...data, description: e.target.value })}
-          className="dark:placeholder-text-600 w-full resize-none border-none px-0 placeholder:text-stone-400 focus:outline-none focus:ring-0 dark:bg-black dark:text-white"
+          className="dark:placeholder-text-600 w-full resize-none border-none px-0 placeholder:text-stone-600 focus:outline-none focus:ring-0 dark:bg-black dark:text-white"
         />
       </div>
       <NovelEditor

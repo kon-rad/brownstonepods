@@ -52,7 +52,7 @@ export default function AwesomePostModal({ homeData, users }: any) {
           }
         });
       }}
-      className="bg-black dark:bg-black w-full rounded-md md:max-w-2xl md:border md:border-stone-200 md:shadow dark:md:border-stone-700"
+      className="w-full rounded-md bg-black dark:bg-black md:max-w-2xl md:border md:border-stone-200 md:shadow dark:md:border-stone-700"
     >
       <div className="relative flex flex-col space-y-4 p-5 md:p-10">
         <h2 className="font-cal text-2xl dark:text-white">
@@ -69,7 +69,7 @@ export default function AwesomePostModal({ homeData, users }: any) {
 
           <Select
             onValueChange={handleSelectChange}
-            className="dark:bg-surface-mixed-300 text-white"
+            className="text-white dark:bg-surface-mixed-300"
           >
             <SelectTrigger className="w-[280px] text-white">
               <SelectValue
@@ -77,11 +77,11 @@ export default function AwesomePostModal({ homeData, users }: any) {
                 className=" text-white"
               />
             </SelectTrigger>
-            <SelectContent className="dark:bg-surface-mixed-300 text-white">
+            <SelectContent className="text-white dark:bg-surface-mixed-300">
               {users.map((usr: any, i: number) => {
                 return (
                   <SelectItem
-                    className="dark:bg-surface-mixed-300 text-white"
+                    className="text-white dark:bg-surface-mixed-300"
                     key={`user_${i}`}
                     value={usr.id}
                   >
@@ -100,7 +100,7 @@ export default function AwesomePostModal({ homeData, users }: any) {
             onChange={(e) => setData({ ...data, to: e.target.value })}
             maxLength={32}
             required
-            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+            className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-600 focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-black dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
           /> */}
         </div>
 
@@ -119,7 +119,7 @@ export default function AwesomePostModal({ homeData, users }: any) {
               onChange={(e) => setData({ ...data, comment: e.target.value })}
               maxLength={140}
               rows={3}
-              className="dark:bg-surface-mixed-300 w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-400  focus:border-black focus:outline-none focus:ring-black dark:border-stone-600 dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+              className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-600 focus:border-black  focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
             />
           </div>
         </div>
@@ -137,8 +137,8 @@ function CreateAwesomePostButton() {
       className={cn(
         "flex h-10 w-full items-center justify-center space-x-2 rounded-md border text-sm transition-all focus:outline-none",
         pending
-          ? "bg-surface-mixed-200 cursor-not-allowed border-stone-200 text-stone-400 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-300"
-          : "bg-surface-mixed-200 border-black text-white hover:bg-white hover:text-black dark:border-stone-700 dark:hover:border-stone-200 dark:hover:bg-black dark:hover:text-white dark:active:bg-stone-800",
+          ? "cursor-not-allowed border-stone-200 bg-surface-mixed-200 text-stone-400 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-300"
+          : "border-black bg-surface-mixed-200 text-white hover:bg-white hover:text-black dark:border-stone-700 dark:hover:border-stone-200 dark:hover:bg-black dark:hover:text-white dark:active:bg-stone-800",
       )}
       disabled={pending}
     >
