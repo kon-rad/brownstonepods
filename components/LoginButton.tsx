@@ -41,7 +41,12 @@ export default function LoginButton({ type, label, icon }: any) {
       <button
         disabled={loading}
         onClick={async () => {
+          const appURL = `${window.location.protocol}//app.${
+            window.location.hostname
+          }${window.location.port ? ":" + window.location.port : ""}`;
+          // const redirectUrl = `${window.location.protocol}//app.${window.location.hostname}`;
           console.log("logging in with ", type);
+          console.log("redirectUrl: ", appURL, window.location.protocol);
 
           setLoading(true);
           if (type === "email") {
@@ -56,6 +61,7 @@ export default function LoginButton({ type, label, icon }: any) {
               alert("Check your email for the sign-in link!");
             }
           } else {
+            // signIn(type, { callbackUrl: appURL });
             signIn(type);
           }
         }}

@@ -69,7 +69,7 @@ export default function EditHomeModal({ homeData }: any) {
           <input
             name="name"
             type="text"
-            placeholder="My Awesome Site"
+            placeholder="name"
             autoFocus
             value={data.name}
             onChange={(e) => setData({ ...data, name: e.target.value })}

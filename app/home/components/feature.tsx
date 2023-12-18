@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+import LoginModalButton from "@/components/login-modal-button";
+import LoginModal from "@/components/modal/login-modal";
 interface FeatureProps {
   title: string;
   description: string;
@@ -64,12 +66,15 @@ const Feature: React.FC<FeatureProps> = ({
             textPosition === "right" ? "justify-end" : ""
           }`}
         >
-          <button
+          <LoginModalButton label="details">
+            <LoginModal />
+          </LoginModalButton>
+          {/* <button
             onClick={handleClick}
             className="mt-9 cursor-pointer rounded-lg border border-black bg-surface-mixed-300 px-4 py-1.5 text-sm font-medium text-white transition-all hover:text-black active:bg-surface-mixed-200 dark:border-stone-700 dark:hover:border-stone-200 dark:hover:bg-surface-mixed-300 dark:hover:text-white dark:active:bg-stone-800"
           >
             details
-          </button>
+          </button> */}
         </div>
       </motion.div>
 

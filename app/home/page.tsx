@@ -6,6 +6,7 @@ import Hero from "./components/hero";
 import Feature from "./components/feature";
 import Footer from "./components/footer";
 import { FaTwitter } from "react-icons/fa6";
+import AppLinkButton from "./components/app-link-button";
 
 const features = [
   {
@@ -52,13 +53,17 @@ export default function HomePage() {
           className="mr-20 rounded-xl"
         />
         <div className="flex items-center justify-center">
-          <Link className="mr-8 cursor-pointer" href="https://app.brownstonepods.com">
-            Go to App
-          </Link>
-          <Link className="mr-8 cursor-pointer" href="https://blog.brownstonepods.com">
+          <AppLinkButton />
+          <Link
+            className="mr-8 cursor-pointer"
+            href="https://blog.brownstonepods.com"
+          >
             Blog
           </Link>
-          <Link className="mr-8 cursor-pointer" href="mailto:hey@brownstone.live">
+          <Link
+            className="mr-8 cursor-pointer"
+            href="mailto:hey@brownstone.live"
+          >
             Contact Us
           </Link>
           <Link
