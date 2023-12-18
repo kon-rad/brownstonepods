@@ -1,13 +1,18 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 const AppLinkButton = () => {
-  const appURL = `${window.location.protocol}//app.${window.location.hostname}${
-    window.location.port ? ":" + window.location.port : ""
-  }`;
+  const [appURL, setAppURL] = useState("https://app.brownstonepods.com");
 
-  console.log("app link button appURL: ", appURL);
+  useEffect(() => {
+    const newAppURL = `${window.location.protocol}//app.${
+      window.location.hostname
+    }${window.location.port ? ":" + window.location.port : ""}`;
+    setAppURL(newAppURL);
+    console.log("app link button appURL: ", newAppURL);
+  }, []);
 
   return (
     <Link className="mr-8 cursor-pointer" href={appURL}>
