@@ -8,6 +8,7 @@ const HomeProfile = ({ data }: any) => {
   // This page is viewable by all
   const availableBeds = data.totalBeds - data.occupiedBeds || 0;
   const handleApply = () => {
+    // todo: handle saving to db
     const url =
       "https://brownstone.live/apply?from=&to=&due_amount=&total=&location=pa";
     window.open(url, "_blank");

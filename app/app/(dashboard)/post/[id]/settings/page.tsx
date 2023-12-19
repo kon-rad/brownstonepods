@@ -4,6 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import Form from "@/components/form";
 import { updatePostMetadata } from "@/lib/actions";
 import DeletePostForm from "@/components/form/delete-post-form";
+import { useSession } from 'next-auth/react';
 
 export default async function PostSettings({
   params,
