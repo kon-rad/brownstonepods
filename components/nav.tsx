@@ -1,21 +1,15 @@
 "use client";
+
 import React, { useContext } from "react";
-import { GlobalStateContext } from "@/context/globalState";
 
 import Link from "next/link";
 import {
   ArrowLeft,
-  BarChart3,
   Edit3,
-  Globe,
-  Layout,
   LayoutDashboard,
-  Megaphone,
   Menu,
   Newspaper,
   Settings,
-  FileCode,
-  Github,
 } from "lucide-react";
 import { FaUsers } from "react-icons/fa";
 import { FaMap } from "react-icons/fa";
@@ -50,12 +44,95 @@ const externalLinks = [
   },
 ];
 
-export default function Nav({ children }: { children: ReactNode }) {
+export default function Nav({
+  children,
+  isOwner,
+}: {
+  children: ReactNode;
+  isOwner: boolean;
+}) {
   const segments = useSelectedLayoutSegments();
   const { id } = useParams() as { id?: string };
-  // const [isOwner, setIsOwner] = useContext(GlobalStateContext);
-
   const [siteId, setSiteId] = useState<string | null>();
+
+  console.log("nav isOwner: ", isOwner);
+
+  const OWNER_SITE_LINKS = [
+    {
+      name: "Back to All Locations",
+      href: "/sites",
+      icon: <ArrowLeft width={18} />,
+    },
+    {
+      name: "Homepage",
+      href: `/site/${id}`,
+      isActive: segments.length === 2,
+      icon: <Newspaper width={18} />,
+    },
+    {
+      name: "Home Settings",
+      href: `/site/${id}/settings`,
+      isActive: segments.includes("settings"),
+      icon: <Settings width={18} />,
+    },
+    {
+      name: "Community Handbook",
+      href: `/site/${id}/handbook`,
+      isActive: segments.includes("handbook"),
+      icon: <IoBook width={18} />,
+    },
+    {
+      name: "Resident Portal",
+      href: `/site/${id}/portal`,
+      isActive: segments.includes("portal"),
+      icon: <FaUsers width={18} />,
+    },
+    {
+      name: "Admin Portal",
+      href: `/site/${id}/admin`,
+      isActive: segments.includes("admin"),
+      icon: <RiAdminFill width={18} />,
+    },
+  ];
+  const VISITOR_SITE_LINKS = [
+    {
+      name: "Back to All Locations",
+      href: "/sites",
+      icon: <ArrowLeft width={18} />,
+    },
+    {
+      name: "Homepage",
+      href: `/site/${id}`,
+      isActive: segments.length === 2,
+      icon: <Newspaper width={18} />,
+    },
+  ];
+  const OWNER_POST_LINKS = [
+    {
+      name: "Back to All Posts",
+      href: siteId ? `/site/${siteId}` : "/sites",
+      icon: <ArrowLeft width={18} />,
+    },
+    {
+      name: "Editor",
+      href: `/post/${id}`,
+      isActive: segments.length === 2,
+      icon: <Edit3 width={18} />,
+    },
+    {
+      name: "Settings",
+      href: `/post/${id}/settings`,
+      isActive: segments.includes("settings"),
+      icon: <Settings width={18} />,
+    },
+  ];
+  const VISITOR_POST_LINKS = [
+    {
+      name: "Back to All Posts",
+      href: siteId ? `/site/${siteId}` : "/sites",
+      icon: <ArrowLeft width={18} />,
+    },
+  ];
 
   useEffect(() => {
     if (segments[0] === "post" && id) {
@@ -64,68 +141,20 @@ export default function Nav({ children }: { children: ReactNode }) {
       });
     }
   }, [segments, id]);
-  console.log("segments: ", segments);
-  console.log("id: ", id);
 
   const tabs = useMemo(() => {
     if (segments[0] === "site" && id) {
-      return [
-        {
-          name: "Back to All Homes",
-          href: "/sites",
-          icon: <ArrowLeft width={18} />,
-        },
-        {
-          name: "Homepage",
-          href: `/site/${id}`,
-          isActive: segments.length === 2,
-          icon: <Newspaper width={18} />,
-        },
-        {
-          name: "Home Settings",
-          href: `/site/${id}/settings`,
-          isActive: segments.includes("settings"),
-          icon: <Settings width={18} />,
-        },
-        {
-          name: "Community Handbook",
-          href: `/site/${id}/handbook`,
-          isActive: segments.includes("handbook"),
-          icon: <IoBook width={18} />,
-        },
-        {
-          name: "Resident Portal",
-          href: `/site/${id}/portal`,
-          isActive: segments.includes("portal"),
-          icon: <FaUsers width={18} />,
-        },
-        {
-          name: "Admin Portal",
-          href: `/site/${id}/admin`,
-          isActive: segments.includes("admin"),
-          icon: <RiAdminFill width={18} />,
-        },
-      ];
+      if (isOwner) {
+        return OWNER_SITE_LINKS;
+      } else {
+        return VISITOR_SITE_LINKS;
+      }
     } else if (segments[0] === "post" && id) {
-      return [
-        {
-          name: "Back to All Posts",
-          href: siteId ? `/site/${siteId}` : "/sites",
-          icon: <ArrowLeft width={18} />,
-        },
-        {
-          name: "Editor",
-          href: `/post/${id}`,
-          isActive: segments.length === 2,
-          icon: <Edit3 width={18} />,
-        },
-        {
-          name: "Settings",
-          href: `/post/${id}/settings`,
-          isActive: segments.includes("settings"),
-          icon: <Settings width={18} />,
-        },
-      ];
+      if (isOwner) {
+        return OWNER_POST_LINKS;
+      } else {
+        return VISITOR_POST_LINKS;
+      }
     }
     return [
       {

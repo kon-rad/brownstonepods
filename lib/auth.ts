@@ -12,24 +12,14 @@ import { isUserOwner } from "@/lib/permissions";
 
 // Create a nodemailer transport for Mailgun
 const mailgunTransport = nodemailer.createTransport({
-  host: "smtp.mailgun.org",
-  port: 587,
+  host: process.env.EMAIL_SERVER_HOST,
+  port: process.env.EMAIL_SERVER_PORT,
   secure: false, // true for 465, false for other ports
   auth: {
-    user: process.env.MAILGUN_USER, // Your Mailgun SMTP user
-    pass: process.env.MAILGUN_PASSWORD, // Your Mailgun SMTP password
+    user: process.env.SMTP_PROVIDER_USER,
+    pass: process.env.SMTP_PROVIDER_PASSWORD,
   },
 });
-// declare module "next-auth" {
-//   interface Session extends DefaultSession {
-//     user: DefaultSession["user"] & {
-//       id: string;
-//     };
-//   }
-//   interface User extends DefaultUser {
-//     role: string;
-//   }
-// }
 
 const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 
@@ -37,15 +27,14 @@ export const authOptions: NextAuthOptions = {
   providers: [
     EmailProvider({
       server: {
-        // ... using the nodemailer transport for Mailgun
         host: process.env.EMAIL_SERVER_HOST,
         port: Number(process.env.EMAIL_SERVER_PORT),
         auth: {
-          user: process.env.EMAIL_SERVER_USER,
-          pass: process.env.EMAIL_SERVER_PASSWORD,
+          user: process.env.SMTP_PROVIDER_USER,
+          pass: process.env.SMTP_PROVIDER_PASSWORD,
         },
       },
-      from: process.env.EMAIL_FROM,
+      from: process.env.SMTP_PROVIDER_USER,
       // Here we pass our custom nodemailer transport
       sendVerificationRequest: ({
         identifier: email,

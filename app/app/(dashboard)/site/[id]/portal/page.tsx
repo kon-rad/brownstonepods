@@ -4,7 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import AwesomePostButton from "@/components/AwesomePostButton";
 import AwesomePostModal from "@/components/modal/awesome-post";
 import { getAllUsers, getAllStarsPosts } from "@/lib/fetchers";
-
+import { isUserOwner } from '@/lib/'
 export default async function SiteAnalytics({
   params,
 }: {
@@ -19,7 +19,15 @@ export default async function SiteAnalytics({
       id: decodeURIComponent(params.id),
     },
   });
-  if (!data || data.userId !== session.user.id) {
+
+  const memberData = await prisma.siteMember.findFirst({
+    where: {
+      siteId: decodeURIComponent(params.id),
+      userId: session.user.id,
+    },
+  });
+  console.log("memberData: ", memberData);
+  if (!data || !memberData) {
     notFound();
   }
 

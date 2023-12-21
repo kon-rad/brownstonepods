@@ -3,12 +3,15 @@
 import BlurImage from "@/components/blur-image";
 import { placeholderBlurhash, random } from "@/lib/utils";
 import ImageGallery from "@/components/ImageGallery";
+import ApplicationButton from "@/components/modal/application-button";
+import ApplicationModal from "@/components/modal/application-modal";
 
 const HomeProfile = ({ data }: any) => {
   // This page is viewable by all
   const availableBeds = data.totalBeds - data.occupiedBeds || 0;
   const handleApply = () => {
     // todo: handle saving to db
+    // createApplication();
     const url =
       "https://brownstone.live/apply?from=&to=&due_amount=&total=&location=pa";
     window.open(url, "_blank");
@@ -45,12 +48,9 @@ const HomeProfile = ({ data }: any) => {
             </h3>
             <p className="text-xl dark:text-white">{availableBeds}</p>
           </div> */}
-          <button
-            onClick={handleApply}
-            className="rounded-lg border border-surface-mixed-200 bg-surface-mixed-200 px-4 py-1.5 text-sm font-medium text-white transition-all active:bg-surface-mixed-200 dark:border-stone-700 dark:hover:bg-surface-mixed-300 dark:hover:bg-surface-mixed-300 dark:hover:text-white dark:active:bg-stone-800"
-          >
-            Apply for Residency
-          </button>
+          <ApplicationButton>
+            <ApplicationModal />
+          </ApplicationButton>
         </div>
       </div>
       <div className="flex flex-col md:flex-row">

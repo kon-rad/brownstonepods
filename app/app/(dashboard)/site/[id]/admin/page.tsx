@@ -2,6 +2,8 @@ import { getSession } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import { getAllUsers } from "@/lib/fetchers";
+import { getAllApplicationsUsers } from "@/lib/database/applications";
+import ApplicationItem from './components/ApplicationItem';
 
 export default async function SiteAdmin({
   params,
@@ -17,12 +19,21 @@ export default async function SiteAdmin({
       id: decodeURIComponent(params.id),
     },
   });
+  const applicationData = await prisma.application.findMany({
+    where: {
+      siteId: decodeURIComponent(params.id),
+    },
+  })
+  console.log("admin view data: ", data);
+  console.log("admin view applicationData: ", applicationData);
+
   if (!data || data.userId !== session.user.id) {
     notFound();
   }
   const users = (await getAllUsers()) || [];
+  const applications = (await getAllApplicationsUsers(decodeURIComponent(params.id))) || [];
   console.log("users: ", users);
-
+  console.log("applications: ", applications);
   const url = `${data.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;
 
   return (
@@ -35,7 +46,19 @@ export default async function SiteAdmin({
         </div>
       </div>
       <div className="flex flex-col">
-        <h3 className="text-whitefont-bold mb-6 font-cal  text-xl dark:text-white sm:text-3xl">
+        <h3 className="text-white font-bold mb-6 font-cal  text-xl dark:text-white sm:text-3xl">
+          All Applications
+        </h3>
+        <div className="flex flex-col space-y-2">
+          {applications.map((item: any, i: number) => {
+            return (
+              <ApplicationItem key={i} {...item} siteId={params.id} />
+            );
+          })}
+        </div>
+      </div>
+      <div className="flex flex-col">
+        <h3 className="text-white font-bold mb-6 font-cal  text-xl dark:text-white sm:text-3xl">
           All Residents
         </h3>
         <div className="flex flex-col space-y-2">
@@ -43,7 +66,7 @@ export default async function SiteAdmin({
             return (
               <div
                 key={`user_${i}`}
-                className="bg-surface-mixed-200 flex w-full flex-row rounded-2xl p-2"
+                className="flex w-full flex-row rounded-2xl bg-surface-mixed-200 p-2"
               >
                 <div className="p-2">
                   <img

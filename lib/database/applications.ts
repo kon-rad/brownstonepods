@@ -16,33 +16,85 @@ import { put } from "@vercel/blob";
 import { customAlphabet } from "nanoid";
 import { getBlurDataURL } from "@/lib/utils";
 
-export const createApplication = async (formData: FormData) => {
+export const createApplication = async (data: any, siteId: string) => {
   const session = await getSession();
+  console.log('this is inside create application', data, siteId);
+  
   if (!session?.user.id) {
     return {
       error: "Not authenticated",
     };
   }
-  const name = formData.get("name") as string;
-  const question1 = formData.get("question1") as string;
-
+  if (!siteId) {
+    return {
+      error: "Missing site Id",
+    };
+  }
+  const name = data.name as string;
+  console.log('saving application: ', name, siteId, data);
+  
   try {
-    const response = await prisma.applications.create({
+    const response = await prisma.application.create({
       data: {
         name,
-        question1,
         user: {
           connect: {
             id: session.user.id,
           },
         },
+        site: {
+          connect: {
+            id: siteId,
+          },
+        },
       },
     });
+
     return response;
   } catch (error: any) {
-    if (error.code === "P2002") {
-      return {
-        error: error.message,
-      };
+    return {
+      error: error.message,
+    };
   }
 };
+
+export async function getAllApplicationsUsers(siteId: string) {
+  return await prisma.application.findMany({
+    where: {
+      siteId: siteId,
+    },
+    include: {
+      user: true, // Include all user fields
+    },
+  });
+}
+
+export async function approveApplication(appId: string, siteId: string, userId: string) {
+  // Update the application status
+  const updatedApplication = await prisma.application.update({
+    where: {
+      id: appId,
+    },
+    data: {
+      status: "Approved",
+    },
+  });
+
+  // Create a new entry in the SiteMember table
+  const newSiteMember = await prisma.siteMember.create({
+    data: {
+      site: {
+        connect: {
+          id: siteId,
+        },
+      },
+      user: {
+        connect: {
+          id: userId,
+        },
+      },
+    },
+  });
+
+  return { updatedApplication, newSiteMember };
+}

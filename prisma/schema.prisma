@@ -36,6 +36,7 @@ model User {
   StarsPost     StarsPost[]
   Owner         Owner[]
   Application   Application[]
+  SiteManager   SiteManager[]
 }
 
 model Account {
@@ -144,6 +145,7 @@ model Site {
   image7        String?
   image7Caption String?
   Application   Application[]
+  SiteManager   SiteManager[]
 
   @@index([userId])
 }
@@ -197,6 +199,16 @@ model SiteMember {
   @@unique([userId, siteId])
 }
 
+model SiteManager {
+  id     String @id @default(cuid())
+  userId String
+  siteId String
+  user   User   @relation(fields: [userId], references: [id])
+  site   Site   @relation(fields: [siteId], references: [id])
+
+  @@unique([userId, siteId])
+}
+
 model MemberAction {
   id         String   @id @default(cuid())
   actionType String // 'join' or 'leave'
@@ -218,9 +230,10 @@ model Application {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   userId     String
-  name       String   @db.Text
-  question_1 String   @db.Text
+  name       String?  @db.Text
+  question_1 String?  @db.Text
   siteId     String
+  status     String?
 
   user User @relation(fields: [userId], references: [id])
   site Site @relation(fields: [siteId], references: [id])

@@ -19,8 +19,33 @@ export default async function SitePosts({
       id: decodeURIComponent(params.id),
     },
   });
+  const residentsData = await prisma.siteMember.findFirst({
+    where: {
+      siteId: decodeURIComponent(params.id),
+      userId: session.user.id,
+    },
+  });
+  const isResident = !!residentsData;
+  const managerData = await prisma.siteManager.findFirst({
+    where: {
+      siteId: decodeURIComponent(params.id),
+      userId: session.user.id,
+    },
+  });
+  const isManager = !!managerData;
+  const applicationData = await prisma.application.findFirst({
+    where: { 
+      siteId: decodeURIComponent(params.id),
+      userId: session.user.id,
+    }
+  })
+  console.log("site homepage view data: ");
+  console.log("site homepage view isResident: ", isResident);
+  console.log("site homepage view isManager: ", isManager);
+  console.log("site homepage view applicationData: ", applicationData);
+  const applicationStatus = !applicationData;
 
-  if (!data || data.userId !== session.user.id) {
+  if (!data) {
     notFound();
   }
 
@@ -30,7 +55,7 @@ export default async function SitePosts({
 
   return (
     <>
-      <div className="bg-black flex flex-col items-center justify-between space-y-4 sm:flex-row sm:space-y-0">
+      <div className="flex flex-col items-center justify-between space-y-4 bg-black sm:flex-row sm:space-y-0">
         <div className="flex flex-col items-center space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
           <h1 className="w-60 truncate font-cal text-4xl font-bold dark:text-white sm:w-auto sm:text-3xl">
             {data.name}
@@ -43,7 +68,7 @@ export default async function SitePosts({
             }
             target="_blank"
             rel="noreferrer"
-            className="bg-surface-mixed-200 truncate rounded-md px-2 py-1 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-400 dark:hover:bg-stone-700"
+            className="truncate rounded-md bg-surface-mixed-200 px-2 py-1 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-400 dark:hover:bg-stone-700"
           >
             {url} ↗
           </a>

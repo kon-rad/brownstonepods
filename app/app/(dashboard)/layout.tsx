@@ -13,7 +13,7 @@ export default async function DashboardLayout({
 
   return (
     <div>
-      <Nav>
+      <Nav isOwner={isOwner}>
         <Suspense fallback={<div>Loading...</div>}>
           <Profile />
         </Suspense>
