@@ -3,12 +3,20 @@ import Form from "@/components/form";
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { editUser } from "@/lib/actions";
+import { getUser } from "@/lib/database/user";
 
 export default async function SettingsPage() {
   const session = await getSession();
+
   if (!session) {
     redirect("/login");
   }
+  const userData = await getUser(session.user.id);
+  if (!userData) {
+    redirect("/login");
+  }
+  console.log("userData: ", userData);
+
   return (
     <div className="flex max-w-screen-xl flex-col space-y-12 p-8">
       <div className="flex flex-col space-y-6">
@@ -22,8 +30,8 @@ export default async function SettingsPage() {
           inputAttrs={{
             name: "name",
             type: "text",
-            defaultValue: session.user.name!,
-            placeholder: "Brendon Urie",
+            defaultValue: userData.name!,
+            placeholder: "Your name",
             maxLength: 32,
           }}
           handleSubmit={editUser}
@@ -36,10 +44,23 @@ export default async function SettingsPage() {
             name: "email",
             type: "email",
             defaultValue: session.user.email!,
-            placeholder: "panic@thedis.co",
+            placeholder: "your email",
           }}
           handleSubmit={editUser}
         />
+        <Form
+          title="bio"
+          description="Tell us something about yourself, who are you?"
+          helpText="Please enter a short bio on yourself"
+          inputAttrs={{
+            name: "bio",
+            type: "text",
+            defaultValue: userData.bio || "",
+            placeholder: "your bio",
+          }}
+          handleSubmit={editUser}
+        />
+        <div className="m-4 flex"></div>
       </div>
     </div>
   );

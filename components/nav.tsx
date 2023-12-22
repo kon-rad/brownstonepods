@@ -47,9 +47,11 @@ const externalLinks = [
 export default function Nav({
   children,
   isOwner,
+  isMember,
 }: {
   children: ReactNode;
   isOwner: boolean;
+  isMember: boolean;
 }) {
   const segments = useSelectedLayoutSegments();
   const { id } = useParams() as { id?: string };
@@ -92,6 +94,31 @@ export default function Nav({
       href: `/site/${id}/admin`,
       isActive: segments.includes("admin"),
       icon: <RiAdminFill width={18} />,
+    },
+  ];
+  const MEMBER_SITE_LINKS = [
+    {
+      name: "Back to All Locations",
+      href: "/sites",
+      icon: <ArrowLeft width={18} />,
+    },
+    {
+      name: "Homepage",
+      href: `/site/${id}`,
+      isActive: segments.length === 2,
+      icon: <Newspaper width={18} />,
+    },
+    {
+      name: "Community Handbook",
+      href: `/site/${id}/handbook`,
+      isActive: segments.includes("handbook"),
+      icon: <IoBook width={18} />,
+    },
+    {
+      name: "Resident Portal",
+      href: `/site/${id}/portal`,
+      isActive: segments.includes("portal"),
+      icon: <FaUsers width={18} />,
     },
   ];
   const VISITOR_SITE_LINKS = [
@@ -146,6 +173,8 @@ export default function Nav({
     if (segments[0] === "site" && id) {
       if (isOwner) {
         return OWNER_SITE_LINKS;
+      } else if (isMember) {
+        return MEMBER_SITE_LINKS;
       } else {
         return VISITOR_SITE_LINKS;
       }

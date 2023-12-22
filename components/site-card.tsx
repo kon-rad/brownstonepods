@@ -4,7 +4,7 @@ import { Site } from "@prisma/client";
 import { BarChart, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
-export default function SiteCard({ data }: { data: Site }) {
+export default function SiteCard({ data, badges }: { data: Site, badges: string[] }) {
   const url = `${data.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;
   return (
     <div className="relative rounded-lg border border-stone-200 pb-10 shadow-md transition-all hover:shadow-xl dark:border-stone-700 dark:hover:border-white">

@@ -1,6 +1,7 @@
 import { getSession } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
+import { isUserOwner, isSiteMember } from '@/lib/permissions';
 
 export default async function SiteAnalytics({
   params,
@@ -16,8 +17,14 @@ export default async function SiteAnalytics({
       id: decodeURIComponent(params.id),
     },
   });
-  if (!data || data.userId !== session.user.id) {
-    notFound();
+
+  const isMember = await isSiteMember(session.user.id, params.id);
+  const isOwner = await isUserOwner(session.user.id);
+  if (!data) {
+    return notFound();
+  }
+  if (!isMember && !isOwner) {
+    return notFound();
   }
 
   const url = `${data.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;

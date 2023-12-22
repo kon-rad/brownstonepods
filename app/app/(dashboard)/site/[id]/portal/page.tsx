@@ -4,7 +4,8 @@ import { notFound, redirect } from "next/navigation";
 import AwesomePostButton from "@/components/AwesomePostButton";
 import AwesomePostModal from "@/components/modal/awesome-post";
 import { getAllUsers, getAllStarsPosts } from "@/lib/fetchers";
-import { isUserOwner } from '@/lib/'
+import { isUserOwner } from '@/lib/permissions';
+
 export default async function SiteAnalytics({
   params,
 }: {
@@ -26,8 +27,12 @@ export default async function SiteAnalytics({
       userId: session.user.id,
     },
   });
-  console.log("memberData: ", memberData);
-  if (!data || !memberData) {
+  const isOwner = await isUserOwner(session.user.id);
+  
+  if (!data) {
+    notFound();
+  }
+  if (!memberData && !isOwner) {
     notFound();
   }
 

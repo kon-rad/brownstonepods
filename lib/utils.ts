@@ -57,3 +57,13 @@ export const toDateString = (date: Date) => {
 export const random = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
+
+export function getSiteIdFromUrl(url: string) {
+  const parsedUrl = new URL(url);
+  const pathSegments = parsedUrl.pathname.split('/').filter(segment => segment);
+
+  // The siteId is always the second segment after '/site/'
+  const siteId = pathSegments[1];
+
+  return siteId;
+}

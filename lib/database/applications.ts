@@ -76,7 +76,7 @@ export async function approveApplication(appId: string, siteId: string, userId: 
       id: appId,
     },
     data: {
-      status: "Approved",
+      status: "APPROVED",
     },
   });
 

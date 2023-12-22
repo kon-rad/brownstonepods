@@ -3,8 +3,17 @@ import Sites from "@/components/sites";
 import PlaceholderCard from "@/components/placeholder-card";
 import CreateSiteButton from "@/components/create-site-button";
 import CreateSiteModal from "@/components/modal/create-site";
+import { isUserOwner } from "@/lib/permissions";
+import { getSession } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
-export default function AllSites({ params }: { params: { id: string } }) {
+export default async function AllSites({ params }: { params: { id: string } }) {
+  const session = await getSession();
+  if (!session) {
+    redirect("/login");
+  }
+  const isOwner = await isUserOwner(session.user.id);
+  console.log("Overview dashboard page isOwner: ", isOwner);
   return (
     <div className="flex max-w-screen-xl flex-col space-y-12 p-8">
       <div className="flex flex-col space-y-6">
@@ -12,9 +21,11 @@ export default function AllSites({ params }: { params: { id: string } }) {
           <h1 className="font-cal text-3xl font-bold dark:text-white">
             All Locations
           </h1>
-          <CreateSiteButton>
-            <CreateSiteModal />
-          </CreateSiteButton>
+          {isOwner && (
+            <CreateSiteButton>
+              <CreateSiteModal />
+            </CreateSiteButton>
+          )}
         </div>
         <Suspense
           fallback={

@@ -25,6 +25,8 @@ export default async function SitePosts({
       userId: session.user.id,
     },
   });
+  console.log('residentsData: ', residentsData);
+  
   const isResident = !!residentsData;
   const managerData = await prisma.siteManager.findFirst({
     where: {
@@ -50,7 +52,6 @@ export default async function SitePosts({
   }
 
   const url = `${data.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;
-  console.log("data: ", data);
   console.log("url: ", url);
 
   return (

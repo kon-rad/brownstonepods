@@ -456,6 +456,8 @@ export const editUser = async (
   }
   const value = formData.get(key) as string;
 
+  console.log('edit user value: ', value, key);
+  
   try {
     const response = await prisma.user.update({
       where: {
