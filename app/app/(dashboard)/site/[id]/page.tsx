@@ -25,8 +25,8 @@ export default async function SitePosts({
       userId: session.user.id,
     },
   });
-  console.log('residentsData: ', residentsData);
-  
+  console.log("residentsData: ", residentsData);
+
   const isResident = !!residentsData;
   const managerData = await prisma.siteManager.findFirst({
     where: {
@@ -36,15 +36,11 @@ export default async function SitePosts({
   });
   const isManager = !!managerData;
   const applicationData = await prisma.application.findFirst({
-    where: { 
+    where: {
       siteId: decodeURIComponent(params.id),
       userId: session.user.id,
-    }
-  })
-  console.log("site homepage view data: ");
-  console.log("site homepage view isResident: ", isResident);
-  console.log("site homepage view isManager: ", isManager);
-  console.log("site homepage view applicationData: ", applicationData);
+    },
+  });
   const applicationStatus = !applicationData;
 
   if (!data) {

@@ -30,6 +30,11 @@ export async function getAllUsers() {
       name: true,
       role: true,
       total_stars: true,
+      recievedStars: {
+        select: {
+          id: true,
+        },
+      },
       username: true,
       gh_username: true,
       g_username: true,
