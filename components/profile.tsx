@@ -9,7 +9,7 @@ export default async function Profile() {
   if (!session?.user) {
     redirect("/login");
   }
-  // console.log("session: ", session);
+  // todo: get user data here from prisma
 
   return (
     <div className="flex w-full items-center justify-between">

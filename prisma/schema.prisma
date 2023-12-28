@@ -147,6 +147,7 @@ model Site {
   image7Caption String?
   Application   Application[]
   SiteManager   SiteManager[]
+  StarsPost     StarsPost[]
 
   @@index([userId])
 }
@@ -188,6 +189,8 @@ model StarsPost {
   likes     Int      @default(0)
   User      User?    @relation(fields: [userId], references: [id])
   userId    String?
+  siteId    String
+  site      Site     @relation(fields: [siteId], references: [id])
 }
 
 model SiteMember {

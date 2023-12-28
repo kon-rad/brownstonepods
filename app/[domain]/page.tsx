@@ -53,7 +53,7 @@ export default async function SiteHomePage({
 
   return (
     <>
-      <div className="bg-surface-mixed-100 w-full p-8 pb-20">
+      <div className="bg-black w-full p-8 pb-20">
         <div className="flex flex-col items-center justify-between space-y-4 sm:flex-row sm:space-y-0 md:max-w-screen-2xl">
           <div className="flex flex-col items-center space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
             <h1 className="mb-12 w-60 truncate font-cal text-4xl font-bold dark:text-white sm:w-auto sm:text-3xl">

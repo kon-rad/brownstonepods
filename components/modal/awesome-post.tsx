@@ -108,7 +108,7 @@ export default function AwesomePostModal({ homeData, users }: any) {
               onChange={(e) => setData({ ...data, comment: e.target.value })}
               maxLength={140}
               rows={3}
-              className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-stone-600 placeholder:text-stone-600 focus:border-black  focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:placeholder-stone-700 dark:focus:ring-white"
+              className="w-full rounded-md border border-stone-200 bg-stone-50 px-4 py-2 text-sm text-white placeholder:text-white focus:border-black  focus:outline-none focus:ring-black dark:border-stone-600 dark:bg-surface-mixed-300 dark:text-white dark:focus:ring-white"
             />
           </div>
         </div>

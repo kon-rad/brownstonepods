@@ -4,8 +4,15 @@ import { Site } from "@prisma/client";
 import { BarChart, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
-export default function SiteCard({ data, badges }: { data: Site, badges: string[] }) {
+export default function SiteCard({
+  data,
+  badges = [],
+}: {
+  data: Site;
+  badges: string[];
+}) {
   const url = `${data.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;
+
   return (
     <div className="relative rounded-lg border border-stone-200 pb-10 shadow-md transition-all hover:shadow-xl dark:border-stone-700 dark:hover:border-white">
       <Link
@@ -30,6 +37,22 @@ export default function SiteCard({ data, badges }: { data: Site, badges: string[
           </p>
         </div>
       </Link>
+      {badges.length > 0 ? (
+        <div className="flex flex-wrap p-4">
+          {badges.map((badge: any, i: number) => {
+            return (
+              <div
+                key={`badge_${i}`}
+                className="rounded-xl bg-surface-mixed-600 p-1 px-2 text-white dark:bg-surface-mixed-600"
+              >
+                {badge}
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        ""
+      )}
       <div className="absolute bottom-4 flex w-full justify-between space-x-4 px-4">
         <a
           href={
@@ -39,7 +62,7 @@ export default function SiteCard({ data, badges }: { data: Site, badges: string[
           }
           target="_blank"
           rel="noreferrer"
-          className="bg-surface-mixed-200 truncate rounded-md px-2 py-1 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-400 dark:hover:bg-stone-700"
+          className="truncate rounded-md bg-surface-mixed-200 px-2 py-1 text-sm font-medium text-stone-600 transition-colors hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-400 dark:hover:bg-stone-700"
         >
           {url} ↗
         </a>

@@ -59,8 +59,13 @@ export const random = (min: number, max: number) => {
 };
 
 export function getSiteIdFromUrl(url: string) {
+  if (!url) {
+    return "";
+  }
   const parsedUrl = new URL(url);
-  const pathSegments = parsedUrl.pathname.split('/').filter(segment => segment);
+  const pathSegments = parsedUrl.pathname
+    .split("/")
+    .filter((segment) => segment);
 
   // The siteId is always the second segment after '/site/'
   const siteId = pathSegments[1];

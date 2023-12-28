@@ -4,12 +4,12 @@ import prisma from "@/lib/prisma";
 import SiteCard from "./site-card";
 import Image from "next/image";
 
-export default async function MyResidences({ limit }: { limit?: number }) {
+export default async function MyResidences() {
   const session = await getSession();
   if (!session) {
     redirect("/login");
   }
-  const MyResidences = await prisma.siteMember.findMany({
+  const myResidences = await prisma.siteMember.findMany({
     where: {
       user: {
         id: session.user.id as string,
@@ -18,15 +18,15 @@ export default async function MyResidences({ limit }: { limit?: number }) {
     include: {
       site: true,
     },
-    orderBy: {
-      createdAt: "asc",
-    },
   });
+  const residencesData = myResidences.map((res: any) => res.site);
 
-  return MyResidences.length > 0 ? (
+  console.log("myResidences: ", myResidences);
+
+  return residencesData.length > 0 ? (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-      {MyResidences.map((site) => (
-        <SiteCard key={site.id} data={site} badges={['member']} />
+      {residencesData.map((site) => (
+        <SiteCard key={site.id} data={site} badges={["member"]} />
       ))}
     </div>
   ) : (
@@ -39,7 +39,7 @@ export default async function MyResidences({ limit }: { limit?: number }) {
         height={400}
       />
       <p className="mt-8 text-lg text-stone-500">
-        You do not have any MyResidences yet. Create one to get started.
+        You do not have any Residences yet. Apply to get started.
       </p>
     </div>
   );

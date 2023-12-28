@@ -12,6 +12,10 @@ module.exports = {
     ignoreBuildErrors: true,
   },
   images: {
+    domains: [
+      `${process.env.S3_UPLOAD_BUCKET}.s3.amazonaws.com`,
+      `${process.env.S3_UPLOAD_BUCKET}.s3.${process.env.S3_UPLOAD_REGION}.amazonaws.com`,
+    ],
     remotePatterns: [
       { hostname: "public.blob.vercel-storage.com" },
       { hostname: "*.public.blob.vercel-storage.com" },

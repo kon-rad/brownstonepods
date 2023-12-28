@@ -57,8 +57,6 @@ export default function Nav({
   const { id } = useParams() as { id?: string };
   const [siteId, setSiteId] = useState<string | null>();
 
-  console.log("nav isOwner: ", isOwner);
-
   const OWNER_SITE_LINKS = [
     {
       name: "Back to All Locations",

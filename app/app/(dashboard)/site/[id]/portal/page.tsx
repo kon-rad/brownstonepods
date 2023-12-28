@@ -4,7 +4,9 @@ import { notFound, redirect } from "next/navigation";
 import AwesomePostButton from "@/components/AwesomePostButton";
 import AwesomePostModal from "@/components/modal/awesome-post";
 import { getAllUsers, getAllStarsPosts } from "@/lib/fetchers";
-import { isUserOwner } from '@/lib/permissions';
+import { isUserOwner } from "@/lib/permissions";
+import { getSiteMembers } from "@/lib/database/siteMember";
+import UserCard from "@/components/user-card";
 
 export default async function SiteAnalytics({
   params,
@@ -28,7 +30,9 @@ export default async function SiteAnalytics({
     },
   });
   const isOwner = await isUserOwner(session.user.id);
-  
+  const siteMembers = await getSiteMembers(params.id);
+  console.log("siteMembers in portal: ", siteMembers);
+
   if (!data) {
     notFound();
   }
@@ -37,21 +41,6 @@ export default async function SiteAnalytics({
   }
 
   const url = `${data.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;
-
-  const residents = [
-    {
-      avatar: "",
-      name: "Konrad Gnat",
-    },
-  ];
-  const wallOfAwesome = [
-    {
-      from: "User 1",
-      to: "Konrad Gnat",
-      comment: "He is a nice guy",
-      createdDate: "11/28/2023",
-    },
-  ];
 
   const users = (await getAllUsers()) || [];
   const posts = await getAllStarsPosts();
@@ -68,7 +57,7 @@ export default async function SiteAnalytics({
       </div>
       <div className="flex flex-col">
         <div className="mb-8 flex flex-col space-x-0 space-y-2">
-          <div className="mb-12 flex flex-row">
+          <div className="mb-12 flex flex-row justify-between">
             <h3 className="mr-4 font-cal text-xl font-bold dark:text-white sm:text-3xl">
               Wall of Awesome
             </h3>
@@ -81,7 +70,7 @@ export default async function SiteAnalytics({
               return (
                 <div
                   key={`user_${i}`}
-                  className="bg-surface-mixed-200 m-2 flex w-1/3 flex-row rounded-2xl p-2"
+                  className="m-2 flex w-1/3 flex-row rounded-2xl bg-surface-mixed-200 p-2"
                 >
                   <div className="p-2">
                     <img
@@ -103,22 +92,15 @@ export default async function SiteAnalytics({
             })}
           </div>
         </div>
-        <div className="flex flex-col items-center space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
+        <div className="flex flex-col space-x-0 space-y-2">
           <h3 className="font-cal text-xl font-bold dark:text-white sm:text-3xl">
             Resident Directory
           </h3>
-          {residents.map((item: any, i: number) => {
-            return (
-              <div key={`user_${i}`} className="m-3 flex flex-col">
-                <div className="p-2"></div>
-                <div className="p-2">
-                  <h3 className="mb-4">{item.to}</h3>
-                  <p className="mb-4">{item.from}</p>
-                  <p className="mb-4">{item.createdDate}</p>
-                </div>
-              </div>
-            );
-          })}
+          <div className="flex w-full flex-col">
+            {siteMembers.map((item: any, i: number) => {
+              return <UserCard key={`user_${i}`} {...item} />;
+            })}
+          </div>
         </div>
       </div>
     </>

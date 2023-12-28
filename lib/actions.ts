@@ -174,25 +174,7 @@ export const updateSite = withSiteAuth(
               "Missing BLOB_READ_WRITE_TOKEN token. Note: Vercel Blob is currently in beta – please fill out this form for access: https://tally.so/r/nPDMNd",
           };
         }
-
-        const file = formData.get(key) as File;
-        const filename = `${nanoid()}.${file.type.split("/")[1]}`;
-
-        const { url } = await put(filename, file, {
-          access: "public",
-        });
-
-        const blurhash = key === "image" ? await getBlurDataURL(url) : null;
-
-        response = await prisma.site.update({
-          where: {
-            id: site.id,
-          },
-          data: {
-            [key]: url,
-            ...(blurhash && { imageBlurhash: blurhash }),
-          },
-        });
+        console.log("error - this does not upload images");
       } else {
         response = await prisma.site.update({
           where: {
@@ -262,7 +244,7 @@ export const getSiteFromPostId = async (postId: string) => {
 };
 
 // export const updatePost = async (data: Post) => {
-export const createAwesomePost = withSiteAuth(async (data: any, id: any) => {
+export const createAwesomePost = async (data: any, id: any) => {
   const session = await getSession();
   console.log("createAwesomePost: ", data);
 
@@ -276,11 +258,13 @@ export const createAwesomePost = withSiteAuth(async (data: any, id: any) => {
       comment: data.comment,
       givenToId: data.to,
       givenById: session.user.id,
+      siteId: id,
     },
   });
 
   return response;
-});
+};
+
 export const createPost = withSiteAuth(async (_: FormData, site: Site) => {
   const session = await getSession();
   if (!session?.user.id) {
@@ -456,8 +440,8 @@ export const editUser = async (
   }
   const value = formData.get(key) as string;
 
-  console.log('edit user value: ', value, key);
-  
+  console.log("edit user value: ", value, key);
+
   try {
     const response = await prisma.user.update({
       where: {

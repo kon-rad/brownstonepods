@@ -107,7 +107,7 @@ export default function Form({
               </div>
             )}
           </div>
-        ) : inputAttrs.name === "description" ? (
+        ) : inputAttrs.name === "description" || inputAttrs.type === 'textarea' ? (
           <textarea
             {...inputAttrs}
             rows={3}

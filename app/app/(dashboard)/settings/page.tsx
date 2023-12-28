@@ -54,7 +54,7 @@ export default async function SettingsPage() {
           helpText="Please enter a short bio on yourself"
           inputAttrs={{
             name: "bio",
-            type: "text",
+            type: "textarea",
             defaultValue: userData.bio || "",
             placeholder: "your bio",
           }}

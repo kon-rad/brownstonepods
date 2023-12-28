@@ -23,7 +23,9 @@ export default async function Overview() {
   return (
     <div className="flex max-w-screen-xl flex-col space-y-12 p-8">
       <div className="flex flex-col space-y-6">
-        {/* // todo:
+        {/* 
+        
+        // todo:
         
         1. display all applications
         2. display all wall of awesome received posts
@@ -47,15 +49,17 @@ export default async function Overview() {
           <MyResidences />
         </Suspense>
       </div>
-      <div className="flex items-center justify-between">
-        <h1 className="font-cal text-3xl font-bold dark:text-white">
-          All Locations
-        </h1>
-        {isOwner && (
-          <CreateSiteButton>
-            <CreateSiteModal />
-          </CreateSiteButton>
-        )}
+      <div className="flex flex-col space-y-6">
+        <div className="flex items-center justify-between">
+          <h1 className="font-cal text-3xl font-bold dark:text-white">
+            All Locations
+          </h1>
+          {isOwner && (
+            <CreateSiteButton>
+              <CreateSiteModal />
+            </CreateSiteButton>
+          )}
+        </div>
         <Suspense
           fallback={
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -68,7 +72,7 @@ export default async function Overview() {
           <Sites limit={4} />
         </Suspense>
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col space-y-6">
         <div className="flex items-center justify-between">
           <h1 className="font-cal text-3xl font-bold dark:text-white">
             All Applications
