@@ -50,7 +50,7 @@ export default function HomePage() {
           height={112}
           src="/brownstone-logo.png"
           alt="brownstone"
-          className="mr-20 rounded-xl"
+          className="mr-20 shadow-logo"
         />
         <div className="flex items-center justify-center">
           <AppLinkButton />

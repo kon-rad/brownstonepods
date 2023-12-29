@@ -4,6 +4,7 @@ import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { editUser } from "@/lib/actions";
 import { getUser } from "@/lib/database/user";
+import ProfileAvatar from "@/components/profile-avatar";
 
 export default async function SettingsPage() {
   const session = await getSession();
@@ -59,6 +60,11 @@ export default async function SettingsPage() {
             placeholder: "your bio",
           }}
           handleSubmit={editUser}
+        />
+        <ProfileAvatar
+          defaultValue={userData.image || ""}
+          userId={userData.id}
+          userEmail={userData.email}
         />
         <div className="m-4 flex"></div>
       </div>

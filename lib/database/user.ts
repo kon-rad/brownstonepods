@@ -1,3 +1,5 @@
+"use server";
+
 import prisma from "@/lib/prisma";
 
 export async function getUser(userId: string) {
@@ -10,5 +12,13 @@ export async function getUser(userId: string) {
       Application: true,
       SiteManager: true,
     },
+  });
+}
+export async function updateUser(userId: string, data: any) {
+  return await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data,
   });
 }

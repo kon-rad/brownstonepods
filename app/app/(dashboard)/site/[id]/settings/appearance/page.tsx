@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 import Form from "@/components/form";
 import { updateSite } from "@/lib/actions";
 import UploadToS3 from "@/components/UploadToS3";
-import GalleryUpload from '@/components/gallery-upload';
+import GalleryUpload from "@/components/gallery-upload";
 
 export default async function SiteSettingsAppearance({
   params,
@@ -23,8 +23,8 @@ export default async function SiteSettingsAppearance({
       image5: siteData.image5,
       image6: siteData.image6,
       image7: siteData.image7,
-    }
-  }
+    };
+  };
 
   return (
     <div className="flex flex-col space-y-6">
@@ -56,8 +56,8 @@ export default async function SiteSettingsAppearance({
         defaultValue={data?.image!}
         name={"image"}
       />
-      <GalleryUpload siteId={params.id} defaultValues={getSiteImages(data)}/>
-      <Form
+      <GalleryUpload siteId={params.id} defaultValues={getSiteImages(data)} />
+      {/* <Form
         title="Logo"
         description="The logo for your site. Accepted formats: .png, .jpg, .jpeg"
         helpText="Max file size 50MB. Recommended size 400x400."
@@ -67,7 +67,7 @@ export default async function SiteSettingsAppearance({
           defaultValue: data?.logo!,
         }}
         handleSubmit={updateSite}
-      />
+      /> */}
       <Form
         title="Font"
         description="The font for the heading text your site."

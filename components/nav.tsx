@@ -230,14 +230,14 @@ export default function Nav({
           <div className="flex items-center space-x-2 rounded-lg px-2 py-1.5">
             <Link
               href="/"
-              className="rounded-lg p-2 hover:bg-stone-200 dark:hover:bg-stone-700"
+              className="hover:bg-stone-200 dark:hover:bg-stone-700"
             >
               <Image
                 src="/brownstone-logo.png"
                 width={360}
                 height={100}
                 alt="Logo"
-                className="rounded-xl dark:scale-110 dark:border dark:border-stone-400"
+                className="dark:scale-110 dark:border dark:border-stone-400"
               />
             </Link>
           </div>

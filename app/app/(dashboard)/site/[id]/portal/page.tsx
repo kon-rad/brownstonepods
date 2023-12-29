@@ -44,7 +44,6 @@ export default async function SiteAnalytics({
 
   const users = (await getAllUsers()) || [];
   const posts = await getAllStarsPosts();
-  console.log("posts render", posts);
 
   return (
     <>

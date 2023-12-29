@@ -56,14 +56,16 @@ export default function LoginButton({ type, label, icon }: any) {
             if (res?.error) {
               // Handle error responses from your API
               console.error("Error in email sign-in", res.error);
+              toast.error(`"Error in email sign-in: ${res.error}`);
             } else {
               // Handle the success, like showing a message to check the email
-              alert("Check your email for the sign-in link!");
+              toast.success(`Check your email for the sign-in link!`);
             }
           } else {
             // signIn(type, { callbackUrl: appURL });
             signIn(type);
           }
+          setLoading(false);
         }}
         className={`${
           loading

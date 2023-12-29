@@ -13,7 +13,7 @@ const LoginPanel = () => {
         alt="Brownstone Pods shared living"
         width={100}
         height={100}
-        className="relative mx-auto h-12 w-auto dark:scale-110 dark:rounded-full dark:border dark:border-stone-400"
+        className="box-shadow-logo relative mx-auto h-12 w-auto dark:scale-110 dark:border dark:border-stone-400"
         src="/brownstone-logo.png"
       />
       <h1 className="mt-6 text-center font-cal text-3xl dark:text-white">

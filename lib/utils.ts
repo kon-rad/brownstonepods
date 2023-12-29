@@ -72,3 +72,15 @@ export function getSiteIdFromUrl(url: string) {
 
   return siteId;
 }
+
+export const getSiteImages = (siteData: any) => {
+  return {
+    image1: siteData.image1,
+    image2: siteData.image2,
+    image3: siteData.image3,
+    image4: siteData.image4,
+    image5: siteData.image5,
+    image6: siteData.image6,
+    image7: siteData.image7,
+  }
+}
